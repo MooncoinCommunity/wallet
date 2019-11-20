@@ -923,6 +923,17 @@ void MoonWordDialog::on_btn_generate_clicked()
                     {
                         print_info = true;
                         textFile << "Transaction hash: " << wtx.GetHash().ToString() << std::endl;
+
+                        CTransaction tx;
+                        uint256 hashBlock;
+
+                         // Requires txindex if not in mempool
+                        if (GetTransaction(wtx.vin[0].prevout.hash, tx, Params().GetConsensus(), hashBlock))
+                        {
+                            CTxDestination fromAddress;
+                            ExtractDestination(tx.vout[wtx.vin[0].prevout.n].scriptPubKey, fromAddress);
+                            textFile << "From: " << CBitcoinAddress(fromAddress).ToString() << std::endl;
+                        }
                         textFile << "Time: " << GUIUtil::dateTimeStr(wtx.GetTxTime()).toStdString() << std::endl;
                     }
 
