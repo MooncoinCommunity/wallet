@@ -741,9 +741,7 @@ void MoonWordDialog::getTransactionDetails(unsigned int& nBytes, CAmount& nPayFe
 void MoonWordDialog::textChanged()
 {
     std::string str = ui->textEdit_message->toPlainText().toStdString();
-    std::string original_str = ui->textEdit_message->toPlainText().toStdString();
-
-    moonwords.clear();
+    std::string original_str = str;
 
     int nDisplayUnit = model->getOptionsModel()->getDisplayUnit();
 
@@ -764,95 +762,54 @@ void MoonWordDialog::textChanged()
         return;
     }
 
-    std::string::const_iterator it = str.begin();
-
-    // Number of moonwords required to send message
-    std::string::size_type moonwordsRequired = str.size() / 4 + (str.size() % 4 ? 1 : 0);
-
-    // Track total for labels
+    // Variables for totals and labels
     CAmount total_amount{0};
+    unsigned int tx_bytes = 0;
+    CAmount tx_fee = 0;
 
-    // Iterate for as many words as are required
-    for (std::string::size_type i = 0; i < moonwordsRequired; ++i)
+    // Total TX too large, pop top chars until under 100KB limit
+    do
     {
-        std::string amountStr;
+        // Update moonwords CAmounts outputs
+        updateMoonwordOutputs(str, total_amount);
 
-        // Work through four chars a time or until the end of message
-        for (int j = 0; j < 4 && it != str.end();)
+        // Update inputs required used and tx_bytes
+        updateMoonwordInputs(tx_bytes, tx_fee, total_amount);
+
+        if (tx_bytes > 100000)
         {
-            // Check that char is allowed
-            std::size_t found = allowedChars().find(*it);
-
-            bool illegal_char = false;
-
-            // Illegal char found
-            if (found == std::string::npos)
-            {
-                illegal_char = true;
-            }
-
-            // Check for double space. Check current pos first.
-            if (isspace(*it))
-            {
-                // Compare against previous char
-                if (it != str.begin() && isspace(*(std::prev(it))))
-                {
-                    illegal_char = true;
-                }
-                // Compare against next char
-                if (std::next(it) != str.end() && isspace(*(std::next(it))))
-                {
-                    illegal_char = true;
-                }
-            }
-
-            if (illegal_char)
-            {
-                // Get cursor and deleted previous char
-                QTextCursor cursor = ui->textEdit_message->textCursor();
-                ui->textEdit_message->setTextCursor(cursor);
-                cursor.deletePreviousChar();
-
-                // Delete char from our copy and update iterator
-                it = str.erase(it);
-                continue;
-            }
-
-            std::string mooncharStr = std::to_string(moonCharLookup(*it));
-
-            // Single char so prefix with '0'
-            if (mooncharStr.size() == 1)
-            {
-                mooncharStr.insert(0, "0");
-            }
-
-            amountStr.append(mooncharStr);
-            ++it;
-            ++j;
+            // Remove last Moonword from message text
+            str = str.substr(0, (str.length() / 4) * 4 - 1);
         }
+    }
+    while (tx_bytes > 100000);
 
-        // If the amount is less than 8 chars fill with 0s
-        amountStr.append(8 - amountStr.size(), '0');
+    // Text string has been changed, update text and exit. textChanged() will be called by the text update here.
+    if (str != original_str)
+    {
+        QTextCursor cursor = ui->textEdit_message->textCursor();
+        int cursor_pos = cursor.position();
 
-        try{
-            CAmount amount = std::stoll(amountStr);
-            total_amount += amount;
+        ui->textEdit_message->setPlainText(QString::fromStdString(str));
 
-            // amount could be zero if new word is a single space, in which case skip it.
-            if (amount > 0)
-            {
-                moonwords.push_back(std::stoll(amountStr));
-            }
-        }
-        catch (const std::invalid_argument&) {} // Invalid arg supplied to stoll
-        catch (const std::out_of_range&) {} // Range outside of long long
+        cursor.setPosition(cursor_pos - (original_str.size() - str.size()));
+        ui->textEdit_message->setTextCursor(cursor);
+
+        return;
     }
 
-    CoinControlDialog::coinControl->UnSelectAll();
-    unsigned int tx_bytes = 0;
-    CAmount selected = 0, tx_fee = 0;
-    getTransactionDetails(tx_bytes, tx_fee);
+    tx_count->setText("1"); // Only ever 1 or 0 at the moment
+    amount->setText(BitcoinUnits::formatWithUnit(nDisplayUnit, total_amount));
+    fee->setText(BitcoinUnits::formatWithUnit(nDisplayUnit, tx_fee));
+    bytes->setText(tx_bytes > 0 ? QString::number(tx_bytes) : "0");
+}
+
+void MoonWordDialog::updateMoonwordInputs(unsigned int &tx_bytes, CAmount &tx_fee, CAmount &total_amount)
+{
+    CAmount selected = 0;
     std::set<COutPoint>::size_type numSelected = 0;
+    getTransactionDetails(tx_bytes, tx_fee);
+    CoinControlDialog::coinControl->UnSelectAll();
 
     // Outside loop double checks selected against total as fee may have changed since inner loop check
     while(selected < total_amount + tx_fee && numSelected < fromOutputs.size())
@@ -872,11 +829,97 @@ void MoonWordDialog::textChanged()
             }
         }
     }
+}
 
-    tx_count->setText("1"); // Only ever 1 or 0 at the moment
-    amount->setText(BitcoinUnits::formatWithUnit(nDisplayUnit, total_amount));
-    fee->setText(BitcoinUnits::formatWithUnit(nDisplayUnit, tx_fee));
-    bytes->setText(tx_bytes > 0 ? QString::number(tx_bytes) : "0");
+void MoonWordDialog::updateMoonwordOutputs(std::string &str, CAmount &total_amount)
+{
+    moonwords.clear();
+    unsigned int nBytes{0};
+    CAmount nPayFee{0};
+
+    std::string::const_iterator it = str.cbegin();
+
+    // Number of moonwords required to send message
+    std::string::size_type moonwordsRequired = (str.size() / 4) + (str.size() % 4 ? 1 : 0);
+
+    // Iterate for as many words as are required
+    for (std::string::size_type i = 0; i < moonwordsRequired; ++i)
+    {
+        std::string amountStr;
+
+        // Work through four chars a time or until the end of message
+        for (int j = 0; j < 4 && it != str.end();)
+        {
+            // Check that char is allowed
+            bool illegal_char = (allowedChars().find(*it) == std::string::npos);
+
+            // Check for double space. Check current pos first.
+            if (isspace(*it))
+            {
+                // Compare against previous char
+                if (it != str.begin() && isspace(*(std::prev(it))))
+                {
+                    illegal_char = true;
+                }
+                // Compare against next char
+                if (std::next(it) != str.end() && isspace(*(std::next(it))))
+                {
+                    illegal_char = true;
+                }
+            }
+
+            if (illegal_char)
+            {
+                // Delete char from our copy and update iterator
+                it = str.erase(it);
+
+                // Total number of required moonwords may now be different
+                moonwordsRequired = str.size() / 4 + (str.size() % 4 ? 1 : 0);
+
+                continue;
+            }
+
+            std::string mooncharStr = std::to_string(moonCharLookup(*it));
+
+            // Single char so prefix with '0'
+            if (mooncharStr.size() == 1)
+            {
+                mooncharStr.insert(0, "0");
+            }
+
+            amountStr.append(mooncharStr);
+            ++it;
+            ++j;
+        }
+
+        std::string::size_type chars_added = amountStr.size();
+
+        // If the amount is less than 8 chars fill with 0s
+        amountStr.append(8 - amountStr.size(), '0');
+
+        try{
+            CAmount amount = std::stoll(amountStr);
+            total_amount += amount;
+
+            // amount could be zero if new word is a single space, in which case skip it.
+            if (amount > 0)
+            {
+                moonwords.push_back(std::stoll(amountStr));
+            }
+        }
+        catch (const std::invalid_argument&) {} // Invalid arg supplied to stoll
+        catch (const std::out_of_range&) {} // Range outside of long long
+
+        getTransactionDetails(nBytes, nPayFee);
+
+        // Oversized and inputs have not been added yet, break here.
+        if (nBytes > 100000)
+        {
+            moonwords.pop_back();
+            str = std::string(str.cbegin(), it - (chars_added / 2));
+            break;
+        }
+    }
 }
 
 void MoonWordDialog::on_btn_generate_clicked()

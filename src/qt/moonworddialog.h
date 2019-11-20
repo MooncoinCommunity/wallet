@@ -99,6 +99,12 @@ private:
     // Calculate bytes and fee for labels
     void getTransactionDetails(unsigned int& nBytes, CAmount& nPayFee);
 
+    // Update list of Moonword CAmounts outputs, return truncated string if message too long
+    void updateMoonwordOutputs(std::string &str, CAmount &total_amount);
+
+    // Update inputs required to pay for message
+    void updateMoonwordInputs(unsigned int &tx_bytes, CAmount &tx_fee, CAmount &total_amount);
+
 private Q_SLOTS:
     void deleteClicked();
     void on_addressBookButton_clicked();
