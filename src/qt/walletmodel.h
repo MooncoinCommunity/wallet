@@ -193,7 +193,8 @@ public:
     bool havePrivKey(const CKeyID &address) const;
     void getOutputs(const std::vector<COutPoint>& vOutpoints, std::vector<COutput>& vOutputs);
     bool isSpent(const COutPoint& outpoint) const;
-    std::map<uint256, CWalletTx> listMoonwordTransactions() const;
+    std::map<uint256, CWalletTx> listMoonwordReceviedTransactions() const;
+    std::map<uint256, CWalletTx> listMoonwordSentTransactions() const;
     bool isChange(const CTxOut& txout) const;
     bool isMine(CTxDestination& address) const;
     void listCoins(std::map<QString, std::vector<COutput> >& mapCoins) const;

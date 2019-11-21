@@ -1125,7 +1125,7 @@
      <item>
       <widget class="QLabel" name="label_2">
        <property name="text">
-        <string>Recipient</string>
+        <string>Generate Reports</string>
        </property>
       </widget>
      </item>
@@ -1147,47 +1147,19 @@
       </widget>
      </item>
      <item>
-      <spacer name="horizontalSpacer_7">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item>
-      <widget class="QLabel" name="label">
+      <widget class="QComboBox" name="cB_sent">
        <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
-       </property>
-       <property name="text">
-        <string>Balance:</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="labelBalance">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="cursor">
-        <cursorShape>IBeamCursor</cursorShape>
-       </property>
+      <widget class="QPushButton" name="btn_generate_sent">
        <property name="text">
-        <string notr="true">123.456 MOON</string>
-       </property>
-       <property name="textInteractionFlags">
-        <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
+        <string>Generate</string>
        </property>
       </widget>
      </item>

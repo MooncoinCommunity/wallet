@@ -88,9 +88,10 @@ private:
     void minimizeFeeSection(bool fMinimize);
     void updateFeeMinimizedLabel();
 
-    // Populate drop down of from addresses
+    // Populate Moonword drop downs
     void populateFromAddresses();
     void populateReceivedAddresses();
+    void populateSentAddresses();
 
     // Moonword lookups by char or int
     const int& moonCharLookup(const char& c);
@@ -113,6 +114,8 @@ private Q_SLOTS:
     void on_buttonChooseFee_clicked();
     void on_buttonMinimizeFee_clicked();
     void on_btn_generate_clicked();
+    void on_btn_generate_sent_clicked();
+    void generateTextReport(std::ofstream &textFile, std::string &addressStr, std::map<uint256, CWalletTx> &transactions);
     void updateDisplayUnit();
     void clipboardTransactionCount();
     void clipboardAmount();

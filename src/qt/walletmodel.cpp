@@ -594,7 +594,7 @@ bool WalletModel::isSpent(const COutPoint& outpoint) const
     return wallet->IsSpent(outpoint.hash, outpoint.n);
 }
 
-std::map<uint256, CWalletTx> WalletModel::listMoonwordTransactions() const
+std::map<uint256, CWalletTx> WalletModel::listMoonwordReceviedTransactions() const
 {
     std::map<uint256, CWalletTx> transactions;
 
@@ -644,6 +644,53 @@ std::map<uint256, CWalletTx> WalletModel::listMoonwordTransactions() const
 
                     // Payment to self
                     if (fAllFromMe && fAllToMe)
+                    {
+                        for (const auto& txout : wtx.vout)
+                        {
+                            // TX should be less than 1 coin
+                            if (txout.nValue < 100000000)
+                            {
+                                transactions.emplace(it->first, it->second);
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    return transactions;
+}
+
+std::map<uint256, CWalletTx> WalletModel::listMoonwordSentTransactions() const
+{
+    std::map<uint256, CWalletTx> transactions;
+
+    {
+        LOCK2(cs_main, wallet->cs_wallet);
+        for(std::map<uint256, CWalletTx>::iterator it = wallet->mapWallet.begin(); it != wallet->mapWallet.end(); ++it)
+        {
+            const CWalletTx &wtx = it->second;
+            CAmount nCredit = wtx.GetCredit(ISMINE_ALL);
+            CAmount nDebit = wtx.GetDebit(ISMINE_ALL);
+            CAmount nNet = nCredit - nDebit;
+
+            if (wtx.GetDepthInMainChain() > 0)
+            {
+                // Incoming transaction
+                if (nNet < 0)
+                {
+                    isminetype fAllFromMe = ISMINE_SPENDABLE;
+                    for (const CTxIn& txin : wtx.vin)
+                    {
+                        isminetype mine = wallet->IsMine(txin);
+                        if(fAllFromMe > mine)
+                            fAllFromMe = mine;
+                    }
+
+                    // Payment from self
+                    if (fAllFromMe)
                     {
                         for (const auto& txout : wtx.vout)
                         {

@@ -232,6 +232,7 @@ MoonWordDialog::MoonWordDialog(const PlatformStyle *platformStyle, CWallet* wall
         // moonward dropdowns
         populateFromAddresses();
         populateReceivedAddresses();
+        populateSentAddresses();
         connect(ui->cB_from, SIGNAL(currentIndexChanged(int)), this, SLOT(selectFromAddress(int)));
 
         subscribeToCoreSignals();
@@ -403,6 +404,7 @@ void MoonWordDialog::clear()
     ui->cB_from->setCurrentIndex(0);
     fromOutputs.clear();
     ui->cB_recipient->setCurrentIndex(0);
+    ui->cB_sent->setCurrentIndex(0);
     updateTabsAndLabels();
 }
 
@@ -435,6 +437,8 @@ QWidget *MoonWordDialog::setupTabChain(QWidget *prev)
     QWidget::setTabOrder(ui->sendButton, ui->clearButton);
     QWidget::setTabOrder(ui->clearButton, ui->cB_recipient);
     QWidget::setTabOrder(ui->cB_recipient, ui->btn_generate);
+    QWidget::setTabOrder(ui->btn_generate, ui->cB_sent);
+    QWidget::setTabOrder(ui->cB_sent, ui->btn_generate_sent);
     return ui->btn_generate;
 }
 
@@ -447,11 +451,6 @@ void MoonWordDialog::setBalance(const CAmount& balance, const CAmount& unconfirm
     Q_UNUSED(watchBalance);
     Q_UNUSED(watchUnconfirmedBalance);
     Q_UNUSED(watchImmatureBalance);
-
-    if(model && model->getOptionsModel())
-    {
-        ui->labelBalance->setText(BitcoinUnits::formatWithUnit(model->getOptionsModel()->getDisplayUnit(), balance));
-    }
 }
 
 void MoonWordDialog::updateDisplayUnit()
@@ -946,71 +945,114 @@ void MoonWordDialog::on_btn_generate_clicked()
         textFile.open(strDest);
 
         std::string addressStr = ui->cB_recipient->currentText().toStdString();
-        std::map<uint256, CWalletTx> transactions = model->listMoonwordTransactions();
+        std::map<uint256, CWalletTx> transactions = model->listMoonwordReceviedTransactions();
 
-        for(const auto& tx_pair : transactions)
-        {
-            const CWalletTx &wtx = tx_pair.second;
-            bool print_info = false;
-            std::string message;
-
-            for (const auto& txout : wtx.vout)
-            {
-                CTxDestination address;
-                ExtractDestination(txout.scriptPubKey, address);
-                const CAmount& value = txout.nValue;
-
-                if (addressStr == CBitcoinAddress(address).ToString() && value < 100000000)
-                {
-                    if (!print_info)
-                    {
-                        print_info = true;
-                        textFile << "Transaction hash: " << wtx.GetHash().ToString() << std::endl;
-
-                        CTransaction tx;
-                        uint256 hashBlock;
-
-                         // Requires txindex if not in mempool
-                        if (GetTransaction(wtx.vin[0].prevout.hash, tx, Params().GetConsensus(), hashBlock))
-                        {
-                            CTxDestination fromAddress;
-                            ExtractDestination(tx.vout[wtx.vin[0].prevout.n].scriptPubKey, fromAddress);
-                            textFile << "From: " << CBitcoinAddress(fromAddress).ToString() << std::endl;
-                        }
-                        textFile << "Time: " << GUIUtil::dateTimeStr(wtx.GetTxTime()).toStdString() << std::endl;
-                    }
-
-                    std::string valueStr = std::to_string(value);
-
-                    // If the amount is less than 8 chars fill with 0s
-                    valueStr.insert(0, 8 - valueStr.size(), '0');
-
-                    std::string subStr;
-                    for (std::string::size_type i = 0; i < valueStr.size(); ++i)
-                    {
-                        subStr += valueStr[i];
-
-                        if (i % 2)
-                        {
-                            textFile << moonCharLookup(std::stoi(subStr));
-                            subStr = "";
-                        }
-                    }
-                }
-            }
-
-            if (print_info)
-            {
-                textFile << std::endl;
-                print_info = false;
-            }
-        }
+        generateTextReport(textFile, addressStr, transactions);
 
         Q_EMIT message(tr("Report Generated Successful"), tr("The report successfully generated to %1.").arg(filename), CClientUIInterface::MSG_INFORMATION);
     }
     catch (std::ofstream::failure& e)
     {
         Q_EMIT message(tr("Report Generation Failed"), tr("There was an error trying to generate the report to %1.").arg(filename), CClientUIInterface::MSG_ERROR);
+    }
+}
+
+
+void MoonWordDialog::on_btn_generate_sent_clicked()
+{
+    int selection = ui->cB_sent->currentIndex();
+
+    if (selection == 0)
+    {
+        return;
+    }
+
+    QString filename = GUIUtil::getSaveFileName(this, tr("Generate Moonword Report"), QString(), tr("Text file (*.txt)"), nullptr);
+
+    if (filename.isEmpty())
+        return;
+
+    const std::string& strDest = filename.toLocal8Bit().data();
+
+    std::ofstream textFile;
+    textFile.exceptions(std::ofstream::failbit);
+
+    try
+    {
+        textFile.open(strDest);
+
+        std::string addressStr = ui->cB_sent->currentText().toStdString();
+        std::map<uint256, CWalletTx> transactions = model->listMoonwordSentTransactions();
+
+        generateTextReport(textFile, addressStr, transactions);
+
+        Q_EMIT message(tr("Report Generated Successful"), tr("The report successfully generated to %1.").arg(filename), CClientUIInterface::MSG_INFORMATION);
+    }
+    catch (std::ofstream::failure& e)
+    {
+        Q_EMIT message(tr("Report Generation Failed"), tr("There was an error trying to generate the report to %1.").arg(filename), CClientUIInterface::MSG_ERROR);
+    }
+}
+
+void MoonWordDialog::generateTextReport(std::ofstream &textFile, std::string &addressStr, std::map<uint256, CWalletTx> &transactions)
+{
+    for(const auto& tx_pair : transactions)
+    {
+        const CWalletTx &wtx = tx_pair.second;
+        bool print_info = false;
+        std::string message;
+
+        for (const auto& txout : wtx.vout)
+        {
+            CTxDestination address;
+            ExtractDestination(txout.scriptPubKey, address);
+            const CAmount& value = txout.nValue;
+
+            if (addressStr == CBitcoinAddress(address).ToString() && value < 100000000)
+            {
+                if (!print_info)
+                {
+                    print_info = true;
+                    textFile << "Transaction hash: " << wtx.GetHash().ToString() << std::endl;
+
+                    CTransaction tx;
+                    uint256 hashBlock;
+
+                     // Requires txindex if not in mempool
+                    if (GetTransaction(wtx.vin[0].prevout.hash, tx, Params().GetConsensus(), hashBlock))
+                    {
+                        CTxDestination fromAddress;
+                        ExtractDestination(tx.vout[wtx.vin[0].prevout.n].scriptPubKey, fromAddress);
+                        textFile << "From: " << CBitcoinAddress(fromAddress).ToString() << std::endl;
+                    }
+                    textFile << "To: " << CBitcoinAddress(address).ToString() << std::endl;
+                    textFile << "Time: " << GUIUtil::dateTimeStr(wtx.GetTxTime()).toStdString() << std::endl;
+                }
+
+                std::string valueStr = std::to_string(value);
+
+                // If the amount is less than 8 chars fill with 0s
+                valueStr.insert(0, 8 - valueStr.size(), '0');
+
+                std::string subStr;
+                for (std::string::size_type i = 0; i < valueStr.size(); ++i)
+                {
+                    subStr += valueStr[i];
+
+                    if (i % 2)
+                    {
+                        textFile << moonCharLookup(std::stoi(subStr));
+                        subStr = "";
+                    }
+                }
+            }
+        }
+
+        if (print_info)
+        {
+            textFile << std::endl;
+            print_info = false;
+        }
     }
 }
 
@@ -1040,10 +1082,10 @@ void MoonWordDialog::populateReceivedAddresses()
     ui->cB_recipient->clear();
 
     // First drop down blank, should default to this if wallet addresses update
-    ui->cB_recipient->addItem("");
+    ui->cB_recipient->addItem("Received");
 
     std::set<std::string> addresses;
-    std::map<uint256, CWalletTx> transactions = model->listMoonwordTransactions();
+    std::map<uint256, CWalletTx> transactions = model->listMoonwordReceviedTransactions();
 
     for(const auto& tx_pair : transactions)
     {
@@ -1065,6 +1107,39 @@ void MoonWordDialog::populateReceivedAddresses()
     for (const auto& addr : addresses)
     {
         ui->cB_recipient->addItem(QString::fromStdString(addr));
+    }
+}
+
+void MoonWordDialog::populateSentAddresses()
+{
+    // Clear drop down list
+    ui->cB_sent->clear();
+
+    // First drop down blank, should default to this if wallet addresses update
+    ui->cB_sent->addItem("Sent");
+
+    std::set<std::string> addresses;
+    std::map<uint256, CWalletTx> transactions = model->listMoonwordSentTransactions();
+
+    for(const auto& tx_pair : transactions)
+    {
+        const CWalletTx &wtx = tx_pair.second;
+        for (const auto& txout : wtx.vout)
+        {
+            CTxDestination address;
+
+            if (txout.nValue < 100000000 && // Less than 1 coin, Moonword
+                    ExtractDestination(txout.scriptPubKey, address) &&
+                    !model->isChange(txout)) // Output is not change
+            {
+                addresses.insert(CBitcoinAddress(address).ToString());
+            }
+        }
+    }
+
+    for (const auto& addr : addresses)
+    {
+        ui->cB_sent->addItem(QString::fromStdString(addr));
     }
 }
 
@@ -1174,6 +1249,7 @@ const char& MoonWordDialog::moonCharLookup(const int& i)
 void MoonWordDialog::updateTransaction()
 {
     populateReceivedAddresses();
+    populateSentAddresses();
     populateFromAddresses();
 }
 
