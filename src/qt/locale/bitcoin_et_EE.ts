@@ -130,8 +130,8 @@
         <translation>Kõvakettal olevate plokkide reindekseerimine...</translation>
     </message>
     <message>
-        <source>Litecoin</source>
-        <translation>Litecoin</translation>
+        <source>Mooncoin</source>
+        <translation>Mooncoin</translation>
     </message>
     <message>
         <source>&amp;Send</source>
@@ -261,8 +261,8 @@
         <translation>Tere tulemast</translation>
     </message>
     <message>
-        <source>Litecoin</source>
-        <translation>Litecoin</translation>
+        <source>Mooncoin</source>
+        <translation>Mooncoin</translation>
     </message>
     <message>
         <source>Error</source>
@@ -755,8 +755,8 @@
 <context>
     <name>bitcoin-core</name>
     <message>
-        <source>Litecoin Core</source>
-        <translation>Litecoin Core</translation>
+        <source>Mooncoin Core</source>
+        <translation>Mooncoin Core</translation>
     </message>
     <message>
         <source>Information</source>

@@ -66,11 +66,11 @@
         <translation>收款地址</translation>
     </message>
     <message>
-        <source>These are your Litecoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <source>These are your Mooncoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
         <translation>您可以给这些莱特币地址付款。在付款之前，务必要检查金额和收款地址是否正确。</translation>
     </message>
     <message>
-        <source>These are your Litecoin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
+        <source>These are your Mooncoin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
         <translation>您可以用这些莱特币地址收款。建议在每次交易时，都使用一个新的收款地址。</translation>
     </message>
     <message>
@@ -176,7 +176,7 @@
         <translation>确认钱包加密</translation>
     </message>
     <message>
-        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR LITECOINS&lt;/b&gt;!</source>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR MOONCOINS&lt;/b&gt;!</source>
         <translation>警告: 如果把钱包加密后又忘记密码，你就会从此&lt;b&gt;失去其中所有的莱特币了&lt;/b&gt;！</translation>
     </message>
     <message>
@@ -188,7 +188,7 @@
         <translation>钱包已加密</translation>
     </message>
     <message>
-        <source>Your wallet is now encrypted. Remember that encrypting your wallet cannot fully protect your litecoins from being stolen by malware infecting your computer.</source>
+        <source>Your wallet is now encrypted. Remember that encrypting your wallet cannot fully protect your mooncoins from being stolen by malware infecting your computer.</source>
         <translation>你的钱包现在已被加密。请记住，对钱包进行加密仍然不能完全防止感染电脑的恶意软件偷取你的莱特币。</translation>
     </message>
     <message>
@@ -342,7 +342,7 @@
         <translation>代理已被&lt;b&gt;启用&lt;/b&gt;：%1</translation>
     </message>
     <message>
-        <source>Send coins to a Litecoin address</source>
+        <source>Send coins to a Mooncoin address</source>
         <translation>向一个莱特币地址发送莱特币</translation>
     </message>
     <message>
@@ -366,7 +366,7 @@
         <translation>验证消息(&amp;V)...</translation>
     </message>
     <message>
-        <source>Litecoin</source>
+        <source>Mooncoin</source>
         <translation>莱特币</translation>
     </message>
     <message>
@@ -390,11 +390,11 @@
         <translation>对钱包中的私钥加密</translation>
     </message>
     <message>
-        <source>Sign messages with your Litecoin addresses to prove you own them</source>
+        <source>Sign messages with your Mooncoin addresses to prove you own them</source>
         <translation>用莱特币地址关联的私钥为消息签名，以证明您拥有这个莱特币地址</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified Litecoin addresses</source>
+        <source>Verify messages to ensure they were signed with specified Mooncoin addresses</source>
         <translation>校验消息，确保该消息是由指定的莱特币地址所有者签名的</translation>
     </message>
     <message>
@@ -414,8 +414,8 @@
         <translation>分页工具栏</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and litecoin: URIs)</source>
-        <translation>请求支付 (生成二维码和 litecoin: URI)</translation>
+        <source>Request payments (generates QR codes and mooncoin: URIs)</source>
+        <translation>请求支付 (生成二维码和 mooncoin: URI)</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>
@@ -426,15 +426,15 @@
         <translation>显示用过的接收地址和标签的列表</translation>
     </message>
     <message>
-        <source>Open a litecoin: URI or payment request</source>
-        <translation>打开一个 litecoin: URI 或支付请求</translation>
+        <source>Open a mooncoin: URI or payment request</source>
+        <translation>打开一个 mooncoin: URI 或支付请求</translation>
     </message>
     <message>
         <source>&amp;Command-line options</source>
         <translation>命令行选项(&amp;C)</translation>
     </message>
     <message numerus="yes">
-        <source>%n active connection(s) to Litecoin network</source>
+        <source>%n active connection(s) to Mooncoin network</source>
         <translation><numerusform>%n 条到莱特币网络的活动连接</numerusform></translation>
     </message>
     <message>
@@ -502,7 +502,7 @@
         <translation>关闭钱包</translation>
     </message>
     <message>
-        <source>Show the %1 help message to get a list with possible Litecoin command-line options</source>
+        <source>Show the %1 help message to get a list with possible Mooncoin command-line options</source>
         <translation>显示 %1 帮助信息，获取可用命令行选项列表</translation>
     </message>
     <message>
@@ -613,7 +613,7 @@
         <translation>钱包已被&lt;b&gt;加密&lt;/b&gt;，当前为&lt;b&gt;锁定&lt;/b&gt;状态</translation>
     </message>
     <message>
-        <source>A fatal error occurred. Litecoin can no longer continue safely and will quit.</source>
+        <source>A fatal error occurred. Mooncoin can no longer continue safely and will quit.</source>
         <translation>发生严重错误。客户端无法安全地继续运行，即将退出。</translation>
     </message>
 </context>
@@ -803,7 +803,7 @@
         <translation>编辑付款地址</translation>
     </message>
     <message>
-        <source>The entered address "%1" is not a valid Litecoin address.</source>
+        <source>The entered address "%1" is not a valid Mooncoin address.</source>
         <translation>输入的地址 %1 并不是有效的莱特币地址。</translation>
     </message>
     <message>
@@ -896,7 +896,7 @@
         <translation>使用自定义的数据目录：</translation>
     </message>
     <message>
-        <source>Litecoin</source>
+        <source>Mooncoin</source>
         <translation>莱特币</translation>
     </message>
     <message>
@@ -908,7 +908,7 @@
         <translation>会在此目录中存储约 %1 GB 的数据。</translation>
     </message>
     <message>
-        <source>%1 will download and store a copy of the Litecoin block chain.</source>
+        <source>%1 will download and store a copy of the Mooncoin block chain.</source>
         <translation>%1 将会下载并存储莱特币区块链。</translation>
     </message>
     <message>
@@ -939,11 +939,11 @@
         <translation>表单</translation>
     </message>
     <message>
-        <source>Recent transactions may not yet be visible, and therefore your wallet's balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the litecoin network, as detailed below.</source>
+        <source>Recent transactions may not yet be visible, and therefore your wallet's balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the mooncoin network, as detailed below.</source>
         <translation>近期交易可能尚未显示，因此当前余额可能不准确。以上信息将在与莱特币网络完全同步后更正。详情如下</translation>
     </message>
     <message>
-        <source>Attempting to spend litecoins that are affected by not-yet-displayed transactions will not be accepted by the network.</source>
+        <source>Attempting to spend mooncoins that are affected by not-yet-displayed transactions will not be accepted by the network.</source>
         <translation>尝试使用受未可见交易影响的余额将不被网络接受。</translation>
     </message>
     <message>
@@ -1125,7 +1125,7 @@
         <translation>动用尚未确认的找零资金(&amp;S)</translation>
     </message>
     <message>
-        <source>Automatically open the Litecoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <source>Automatically open the Mooncoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
         <translation>自动在路由器中打开莱特币端口。只有当您的路由器开启了 UPnP 选项时此功能才有效。</translation>
     </message>
     <message>
@@ -1141,7 +1141,7 @@
         <translation>允许流入连接(&amp;G)</translation>
     </message>
     <message>
-        <source>Connect to the Litecoin network through a SOCKS5 proxy.</source>
+        <source>Connect to the Mooncoin network through a SOCKS5 proxy.</source>
         <translation>通过 SOCKS5 代理连接莱特币网络。</translation>
     </message>
     <message>
@@ -1177,7 +1177,7 @@
         <translation>Tor</translation>
     </message>
     <message>
-        <source>Connect to the Litecoin network through a separate SOCKS5 proxy for Tor hidden services.</source>
+        <source>Connect to the Mooncoin network through a separate SOCKS5 proxy for Tor hidden services.</source>
         <translation>访问 Tor 隐藏服务上的莱特币网络时使用另一个 SOCKS5 代理。</translation>
     </message>
     <message>
@@ -1288,7 +1288,7 @@
         <translation>表单</translation>
     </message>
     <message>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Litecoin network after a connection is established, but this process has not completed yet.</source>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Mooncoin network after a connection is established, but this process has not completed yet.</source>
         <translation>现在显示的消息可能是过期的。在连接上莱特币网络节点后，您的钱包将自动与网络同步，但是这个过程还没有完成。</translation>
     </message>
     <message>
@@ -1363,8 +1363,8 @@
         <translation>要求付款时发生错误</translation>
     </message>
     <message>
-        <source>Cannot start litecoin: click-to-pay handler</source>
-        <translation>无法启动 litecoin 协议的“
+        <source>Cannot start mooncoin: click-to-pay handler</source>
+        <translation>无法启动 mooncoin 协议的“
 一键支付”处理器</translation>
     </message>
     <message>
@@ -1372,8 +1372,8 @@
         <translation>URI 处理</translation>
     </message>
     <message>
-        <source>'litecoin://' is not a valid URI. Use 'litecoin:' instead.</source>
-        <translation>‘litecoin://’不是合法的URI。请使用'litecoin:'作为替代。</translation>
+        <source>'mooncoin://' is not a valid URI. Use 'mooncoin:' instead.</source>
+        <translation>‘mooncoin://’不是合法的URI。请使用'mooncoin:'作为替代。</translation>
     </message>
     <message>
         <source>You are using a BIP70 URL which will be unsupported in the future.</source>
@@ -1392,7 +1392,7 @@
         <translation>无效的付款地址 %1</translation>
     </message>
     <message>
-        <source>URI cannot be parsed! This can be caused by an invalid Litecoin address or malformed URI parameters.</source>
+        <source>URI cannot be parsed! This can be caused by an invalid Mooncoin address or malformed URI parameters.</source>
         <translation>无法解析 URI 地址！可能是因为莱特币地址无效，或是 URI 参数格式错误。</translation>
     </message>
     <message>
@@ -1490,7 +1490,7 @@
         <translation>金额</translation>
     </message>
     <message>
-        <source>Enter a Litecoin address (e.g. %1)</source>
+        <source>Enter a Mooncoin address (e.g. %1)</source>
         <translation>请输入一个莱特币地址 (例如 %1)</translation>
     </message>
     <message>
@@ -1942,7 +1942,7 @@
         <translation>消息(&amp;M)：</translation>
     </message>
     <message>
-        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Litecoin network.</source>
+        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Mooncoin network.</source>
         <translation>可在付款请求上备注一条信息，在打开付款请求时可以看到。注意：该消息不是通过莱特币网络传送。</translation>
     </message>
     <message>
@@ -2223,7 +2223,7 @@ Note:  Since the fee is calculated on a per-byte basis, a fee of "100 satoshis p
         <translation>粉尘：</translation>
     </message>
     <message>
-        <source>When there is less transaction volume than space in the blocks, miners as well as relaying nodes may enforce a minimum fee. Paying only this minimum fee is just fine, but be aware that this can result in a never confirming transaction once there is more demand for litecoin transactions than the network can process.</source>
+        <source>When there is less transaction volume than space in the blocks, miners as well as relaying nodes may enforce a minimum fee. Paying only this minimum fee is just fine, but be aware that this can result in a never confirming transaction once there is more demand for mooncoin transactions than the network can process.</source>
         <translation>当交易量小于可用区块空间时，矿工和中继节点可能会执行最低手续费率限制。按照这个最低费率来支付手续费也是可以的，但请注意，一旦交易需求超出莱特币网络能处理的限度，你的交易可能永远也无法确认。</translation>
     </message>
     <message>
@@ -2371,7 +2371,7 @@ Note:  Since the fee is calculated on a per-byte basis, a fee of "100 satoshis p
         <translation><numerusform>预计在等待 %n 个区块后会有第一个确认。</numerusform></translation>
     </message>
     <message>
-        <source>Warning: Invalid Litecoin address</source>
+        <source>Warning: Invalid Mooncoin address</source>
         <translation>警告: 莱特币地址无效</translation>
     </message>
     <message>
@@ -2414,7 +2414,7 @@ Note:  Since the fee is calculated on a per-byte basis, a fee of "100 satoshis p
         <translation>这是笔正常的支付。</translation>
     </message>
     <message>
-        <source>The Litecoin address to send the payment to</source>
+        <source>The Mooncoin address to send the payment to</source>
         <translation>付款目的地址</translation>
     </message>
     <message>
@@ -2434,7 +2434,7 @@ Note:  Since the fee is calculated on a per-byte basis, a fee of "100 satoshis p
         <translation>移除此项</translation>
     </message>
     <message>
-        <source>The fee will be deducted from the amount being sent. The recipient will receive less litecoins than you enter in the amount field. If multiple recipients are selected, the fee is split equally.</source>
+        <source>The fee will be deducted from the amount being sent. The recipient will receive less mooncoins than you enter in the amount field. If multiple recipients are selected, the fee is split equally.</source>
         <translation>交易费将从发送总额中扣除。接收人将收到比您在金额框中输入的更少的莱特币。如果选中了多个收件人，交易费平分。</translation>
     </message>
     <message>
@@ -2462,8 +2462,8 @@ Note:  Since the fee is calculated on a per-byte basis, a fee of "100 satoshis p
         <translation>请为此地址输入一个标签以将它加入用过的地址列表</translation>
     </message>
     <message>
-        <source>A message that was attached to the litecoin: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Litecoin network.</source>
-        <translation>litecoin:URI 附带的备注信息，将会和交易一起存储，备查。 注意：该消息不会通过莱特币网络传输。</translation>
+        <source>A message that was attached to the mooncoin: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Mooncoin network.</source>
+        <translation>mooncoin:URI 附带的备注信息，将会和交易一起存储，备查。 注意：该消息不会通过莱特币网络传输。</translation>
     </message>
     <message>
         <source>Pay To:</source>
@@ -2507,11 +2507,11 @@ Note:  Since the fee is calculated on a per-byte basis, a fee of "100 satoshis p
         <translation>签名消息(&amp;S)</translation>
     </message>
     <message>
-        <source>You can sign messages/agreements with your addresses to prove you can receive litecoins sent to them. Be careful not to sign anything vague or random, as phishing attacks may try to trick you into signing your identity over to them. Only sign fully-detailed statements you agree to.</source>
+        <source>You can sign messages/agreements with your addresses to prove you can receive mooncoins sent to them. Be careful not to sign anything vague or random, as phishing attacks may try to trick you into signing your identity over to them. Only sign fully-detailed statements you agree to.</source>
         <translation>您可以用你的地址对消息/协议进行签名，以证明您可以接收发送到该地址的莱特币。注意不要对任何模棱两可或者随机的消息进行签名，以免遭受钓鱼式攻击。请确保消息内容准确的表达了您的真实意愿。</translation>
     </message>
     <message>
-        <source>The Litecoin address to sign the message with</source>
+        <source>The Mooncoin address to sign the message with</source>
         <translation>用来对消息签名的地址 </translation>
     </message>
     <message>
@@ -2543,7 +2543,7 @@ Note:  Since the fee is calculated on a per-byte basis, a fee of "100 satoshis p
         <translation>复制当前签名至剪切板</translation>
     </message>
     <message>
-        <source>Sign the message to prove you own this Litecoin address</source>
+        <source>Sign the message to prove you own this Mooncoin address</source>
         <translation>签名消息，证明这个地址属于您。</translation>
     </message>
     <message>
@@ -2567,11 +2567,11 @@ Note:  Since the fee is calculated on a per-byte basis, a fee of "100 satoshis p
         <translation>请在下面输入接收者地址、消息（确保换行符、空格符、制表符等完全相同）和签名以验证消息。请仔细核对签名信息，以提防中间人攻击。请注意，这只是证明接收方签名的地址，它不能证明任何交易！</translation>
     </message>
     <message>
-        <source>The Litecoin address the message was signed with</source>
+        <source>The Mooncoin address the message was signed with</source>
         <translation>消息使用的签名地址</translation>
     </message>
     <message>
-        <source>Verify the message to ensure it was signed with the specified Litecoin address</source>
+        <source>Verify the message to ensure it was signed with the specified Mooncoin address</source>
         <translation>验证消息，确保消息是由指定的莱特币地址签名过的。</translation>
     </message>
     <message>
@@ -3239,8 +3239,8 @@ Note:  Since the fee is calculated on a per-byte basis, a fee of "100 satoshis p
         <translation>无法启动HTTP服务，查看日志获取更多信息</translation>
     </message>
     <message>
-        <source>Litecoin Core</source>
-        <translation>Litecoin Core</translation>
+        <source>Mooncoin Core</source>
+        <translation>Mooncoin Core</translation>
     </message>
     <message>
         <source>The %s developers</source>

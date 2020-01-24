@@ -54,11 +54,11 @@
         <translation>అందుకునే చిరునామాలు</translation>
     </message>
     <message>
-        <source>These are your Litecoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <source>These are your Mooncoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
         <translation>ఇవి మీరు పంపే చెల్లింపుల బిట్‌కాయిన్ చిరునామాలు. నాణేలు పంపే ముందు ప్రతిసారి అందుకునే చిరునామా మరియు చెల్లింపు మొత్తం సరిచూసుకోండి.</translation>
     </message>
     <message>
-        <source>These are your Litecoin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
+        <source>These are your Mooncoin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
         <translation>ఇవి మీరు అందుకునే చెల్లింపుల బిట్‌కాయిన్ చిరునామాలు. ప్రతీ లావాదేవీకి క్రొత్త అందుకునే చిరునామా వాడటం మంచిది.</translation>
     </message>
     <message>
@@ -105,19 +105,19 @@
     </message>
     <message>
         <source>Enter the new passphrase to the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
-        <translation>జోలెకు క్రొత్త సంకేతపదము ఇవ్వండి.&lt;br/&gt; &lt;b&gt;పది లేదా ఎక్కువ యాదృచ్ఛిక అక్షరాలు&lt;/b&gt;, లేక &lt;b&gt;ఎనిమిది కంటే ఎక్కువ పదాలు&lt;/b&gt; కలిగి ఉన్న సంకేతపదము దయచేసి వాడండి.</translation>
+        <translation>జోలెకు క్రొత్త సంకేతపదము ఇవ్వండి.&lt;br/&gt; &lt;b&gt;పది లేదా ఎక్కువ యాదృచ్ఛిక అక్షరాలు&lt;/b&gt;, లేక &lt;b&gt;ఎనిమిది కంటే ఎక్కువ పదాలు&lt;/b&gt; కలిగి ఉన్న సంకేతపదము దయచేసి వాడండి.</translation>
     </message>
     <message>
         <source>Unlock wallet</source>
         <translation>వాలెట్ అన్లాక్</translation>
     </message>
     <message>
-        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR LITECOINS&lt;/b&gt;!</source>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR MOONCOINS&lt;/b&gt;!</source>
         <translation>హెచ్చరిక: మీ జోలెని సంకేతపరిచి మీ సంకేతపదము కోల్పోతే, &lt;b&gt;మీ బిట్‌కాయిన్లు అన్నీ కోల్పోతారు&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Are you sure you wish to encrypt your wallet?</source>
-        <translation>మీరు ఖచ్చితంగా మీ జోలెని సంకేతపరచాలని కోరుకుంటున్నారా?</translation>
+        <translation>మీరు ఖచ్చితంగా మీ జోలెని సంకేతపరచాలని కోరుకుంటున్నారా?</translation>
     </message>
     <message>
         <source>Wallet encrypted</source>
@@ -138,7 +138,7 @@
         <translation>నిష్క్రమించు</translation>
     </message>
     <message>
-        <source>Litecoin</source>
+        <source>Mooncoin</source>
         <translation>బిట్కోయిన్</translation>
     </message>
     <message>
@@ -193,7 +193,7 @@
 <context>
     <name>Intro</name>
     <message>
-        <source>Litecoin</source>
+        <source>Mooncoin</source>
         <translation>బిట్కోయిన్</translation>
     </message>
     <message>
@@ -391,7 +391,7 @@
 <context>
     <name>bitcoin-core</name>
     <message>
-        <source>Litecoin Core</source>
+        <source>Mooncoin Core</source>
         <translation>బిట్కోయిన్ కోర్</translation>
     </message>
     <message>

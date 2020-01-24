@@ -42,8 +42,8 @@
         <translation>Auswählen</translation>
     </message>
     <message>
-        <source>These are your Litecoin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
-        <translation>Dies sind Ihre Litecoin-Adressen für den Empfang von Zahlungen. Es wird empfohlen, für jede Transaktion eine neue Empfangsadresse zu verwenden.</translation>
+        <source>These are your Mooncoin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
+        <translation>Dies sind Ihre Mooncoin-Adressen für den Empfang von Zahlungen. Es wird empfohlen, für jede Transaktion eine neue Empfangsadresse zu verwenden.</translation>
     </message>
     <message>
         <source>Export Address List</source>
@@ -222,8 +222,8 @@
         <translation>Nachricht &amp;bestätigen</translation>
     </message>
     <message>
-        <source>Litecoin</source>
-        <translation>Litecoin</translation>
+        <source>Mooncoin</source>
+        <translation>Mooncoin</translation>
     </message>
     <message>
         <source>&amp;Send</source>
@@ -246,12 +246,12 @@
         <translation>Verschlüssele die Private Keys, die zu deiner Brieftasche gehören</translation>
     </message>
     <message>
-        <source>Sign messages with your Litecoin addresses to prove you own them</source>
-        <translation>Nachrichten mit Ihrer Litecoin-Adresse signieren, um zu beweisen, dass sie Ihnen gehören</translation>
+        <source>Sign messages with your Mooncoin addresses to prove you own them</source>
+        <translation>Nachrichten mit Ihrer Mooncoin-Adresse signieren, um zu beweisen, dass sie Ihnen gehören</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified Litecoin addresses</source>
-        <translation>Überprüfen Sie Nachrichten, um sicherzustellen, dass sie mit den angegebenen Litecoin-Adressen signiert wurden</translation>
+        <source>Verify messages to ensure they were signed with specified Mooncoin addresses</source>
+        <translation>Überprüfen Sie Nachrichten, um sicherzustellen, dass sie mit den angegebenen Mooncoin-Adressen signiert wurden</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -316,8 +316,8 @@
         <translation>Überweisung empfangen</translation>
     </message>
     <message>
-        <source>A fatal error occurred. Litecoin can no longer continue safely and will quit.</source>
-        <translation>Ein schwerwiegender Fehler ist aufgetreten. Litecoin kann nicht mehr sicher fortfahren und beendet sich.</translation>
+        <source>A fatal error occurred. Mooncoin can no longer continue safely and will quit.</source>
+        <translation>Ein schwerwiegender Fehler ist aufgetreten. Mooncoin kann nicht mehr sicher fortfahren und beendet sich.</translation>
     </message>
 </context>
 <context>
@@ -415,8 +415,8 @@
         <translation>Willkommen</translation>
     </message>
     <message>
-        <source>Litecoin</source>
-        <translation>Litecoin</translation>
+        <source>Mooncoin</source>
+        <translation>Mooncoin</translation>
     </message>
     <message>
         <source>Error</source>
@@ -460,8 +460,8 @@
         <translation>Betrag</translation>
     </message>
     <message>
-        <source>Enter a Litecoin address (e.g. %1)</source>
-        <translation>Litecoin Adresse eingeben (z.B. %1)</translation>
+        <source>Enter a Mooncoin address (e.g. %1)</source>
+        <translation>Mooncoin Adresse eingeben (z.B. %1)</translation>
     </message>
     <message>
         <source>N/A</source>

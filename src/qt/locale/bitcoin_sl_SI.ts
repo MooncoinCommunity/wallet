@@ -66,12 +66,12 @@
         <translation>Imenik naslovov za prejemanje</translation>
     </message>
     <message>
-        <source>These are your Litecoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>To so vaši Litecoin naslovi za pošiljanje. Pred pošiljanjem vedno preverite količino in prejemnikov naslov.</translation>
+        <source>These are your Mooncoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <translation>To so vaši Mooncoin naslovi za pošiljanje. Pred pošiljanjem vedno preverite količino in prejemnikov naslov.</translation>
     </message>
     <message>
-        <source>These are your Litecoin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
-        <translation>To so vaši Litecoin naslovi za prejemanje. Priporočeno je, da za vsako transakcijo uporabite nov naslov.</translation>
+        <source>These are your Mooncoin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
+        <translation>To so vaši Mooncoin naslovi za prejemanje. Priporočeno je, da za vsako transakcijo uporabite nov naslov.</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -172,8 +172,8 @@
         <translation>Potrdi šifriranje denarnice</translation>
     </message>
     <message>
-        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR LITECOINS&lt;/b&gt;!</source>
-        <translation>Opozorilo: V primeru izgube gesla šifrirane denarnice, boste &lt;b&gt;IZGUBILI VSE SVOJE LITECOINE&lt;/b&gt;!</translation>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR MOONCOINS&lt;/b&gt;!</source>
+        <translation>Opozorilo: V primeru izgube gesla šifrirane denarnice, boste &lt;b&gt;IZGUBILI VSE SVOJE MOONCOINE&lt;/b&gt;!</translation>
     </message>
     <message>
         <source>Are you sure you wish to encrypt your wallet?</source>
@@ -184,7 +184,7 @@
         <translation>Denarnica šifrirana</translation>
     </message>
     <message>
-        <source>Your wallet is now encrypted. Remember that encrypting your wallet cannot fully protect your litecoins from being stolen by malware infecting your computer.</source>
+        <source>Your wallet is now encrypted. Remember that encrypting your wallet cannot fully protect your mooncoins from being stolen by malware infecting your computer.</source>
         <translation>Vaša denarnica je sedaj šifrirana. Pomnite, da šifriranje denarnice ne more popolnoma zaščititi vaših kovancev pred krajo z virusi ali drugimi zlonamernimi programi.</translation>
     </message>
     <message>
@@ -338,8 +338,8 @@
         <translation>Namestniški strežnik je omogočen&lt;/b&gt;: %1</translation>
     </message>
     <message>
-        <source>Send coins to a Litecoin address</source>
-        <translation>Izvedite plačilo na naslov Litecoin</translation>
+        <source>Send coins to a Mooncoin address</source>
+        <translation>Izvedite plačilo na naslov Mooncoin</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -362,8 +362,8 @@
         <translation>&amp;Preveri sporočilo ...</translation>
     </message>
     <message>
-        <source>Litecoin</source>
-        <translation>Litecoin</translation>
+        <source>Mooncoin</source>
+        <translation>Mooncoin</translation>
     </message>
     <message>
         <source>&amp;Send</source>
@@ -386,12 +386,12 @@
         <translation>Šifrirajte zasebne ključe, ki se nahajajo v denarnici</translation>
     </message>
     <message>
-        <source>Sign messages with your Litecoin addresses to prove you own them</source>
-        <translation>Podpišite poljubno sporočilo z enim svojih naslovov Litecoin, da prejemniku sporočila dokažete, da je ta naslov v vaši lasti.</translation>
+        <source>Sign messages with your Mooncoin addresses to prove you own them</source>
+        <translation>Podpišite poljubno sporočilo z enim svojih naslovov Mooncoin, da prejemniku sporočila dokažete, da je ta naslov v vaši lasti.</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified Litecoin addresses</source>
-        <translation>Preverite, če je bilo prejeto sporočilo podpisano z določenim naslovom Litecoin</translation>
+        <source>Verify messages to ensure they were signed with specified Mooncoin addresses</source>
+        <translation>Preverite, če je bilo prejeto sporočilo podpisano z določenim naslovom Mooncoin</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -410,8 +410,8 @@
         <translation>Orodna vrstica zavihkov</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and litecoin: URIs)</source>
-        <translation>Zahtevajte plačilo (ustvarite zahtevek s kodo QR in URI tipa litecoin:)</translation>
+        <source>Request payments (generates QR codes and mooncoin: URIs)</source>
+        <translation>Zahtevajte plačilo (ustvarite zahtevek s kodo QR in URI tipa mooncoin:)</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>
@@ -422,16 +422,16 @@
         <translation>Preglejte in uredite seznam naslovov, na katere ste kdaj prejeli plačila</translation>
     </message>
     <message>
-        <source>Open a litecoin: URI or payment request</source>
-        <translation>Izvedite plačilo iz zahtevka v datoteki ali iz URI tipa litecoin:</translation>
+        <source>Open a mooncoin: URI or payment request</source>
+        <translation>Izvedite plačilo iz zahtevka v datoteki ali iz URI tipa mooncoin:</translation>
     </message>
     <message>
         <source>&amp;Command-line options</source>
         <translation>Opcije &amp;ukazne vrstice</translation>
     </message>
     <message numerus="yes">
-        <source>%n active connection(s) to Litecoin network</source>
-        <translation><numerusform>%n aktivna povezava v omrežje Litecoin</numerusform><numerusform>%n aktivni povezavi v omrežje Litecoin</numerusform><numerusform>%n aktivne povezave v omrežje Litecoin</numerusform><numerusform>%n aktivnih povezav v omrežje Litecoin</numerusform></translation>
+        <source>%n active connection(s) to Mooncoin network</source>
+        <translation><numerusform>%n aktivna povezava v omrežje Mooncoin</numerusform><numerusform>%n aktivni povezavi v omrežje Mooncoin</numerusform><numerusform>%n aktivne povezave v omrežje Mooncoin</numerusform><numerusform>%n aktivnih povezav v omrežje Mooncoin</numerusform></translation>
     </message>
     <message>
         <source>Indexing blocks on disk...</source>
@@ -498,7 +498,7 @@
         <translation>Zapri denarnico</translation>
     </message>
     <message>
-        <source>Show the %1 help message to get a list with possible Litecoin command-line options</source>
+        <source>Show the %1 help message to get a list with possible Mooncoin command-line options</source>
         <translation>Pokaži %1 sporočilo za pomoč s seznamom vseh možnosti v ukazni vrstici</translation>
     </message>
     <message>
@@ -609,8 +609,8 @@
         <translation>Denarnica je &lt;b&gt;šifrirana&lt;/b&gt; in trenutno &lt;b&gt;zaklenjena&lt;/b&gt;</translation>
     </message>
     <message>
-        <source>A fatal error occurred. Litecoin can no longer continue safely and will quit.</source>
-        <translation>Napaka. Litecoin ne more več varno nadaljevati in se bo zaprl.</translation>
+        <source>A fatal error occurred. Mooncoin can no longer continue safely and will quit.</source>
+        <translation>Napaka. Mooncoin ne more več varno nadaljevati in se bo zaprl.</translation>
     </message>
 </context>
 <context>
@@ -799,8 +799,8 @@
         <translation>Uredi naslov za pošiljanje</translation>
     </message>
     <message>
-        <source>The entered address "%1" is not a valid Litecoin address.</source>
-        <translation>Vnešeni naslov %1 ni veljaven Litecoin naslov.</translation>
+        <source>The entered address "%1" is not a valid Mooncoin address.</source>
+        <translation>Vnešeni naslov %1 ni veljaven Mooncoin naslov.</translation>
     </message>
     <message>
         <source>Address "%1" already exists as a receiving address with label "%2" and so cannot be added as a sending address.</source>
@@ -880,8 +880,8 @@
         <translation>Uporabi to podatkovno mapo:</translation>
     </message>
     <message>
-        <source>Litecoin</source>
-        <translation>Litecoin</translation>
+        <source>Mooncoin</source>
+        <translation>Mooncoin</translation>
     </message>
     <message>
         <source>At least %1 GB of data will be stored in this directory, and it will grow over time.</source>
@@ -892,8 +892,8 @@
         <translation>Približno %1 GB podatkov bo shranjenih v tem direktoriju.</translation>
     </message>
     <message>
-        <source>%1 will download and store a copy of the Litecoin block chain.</source>
-        <translation>%1 bo prenesel in shranil kopijo Litecoin baze podatkovnih blokov.</translation>
+        <source>%1 will download and store a copy of the Mooncoin block chain.</source>
+        <translation>%1 bo prenesel in shranil kopijo Mooncoin baze podatkovnih blokov.</translation>
     </message>
     <message>
         <source>The wallet will also be stored in this directory.</source>
@@ -1069,7 +1069,7 @@
         <translation>Omogoči &amp;trošenje drobiža iz še nepotrjenih plačil</translation>
     </message>
     <message>
-        <source>Automatically open the Litecoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <source>Automatically open the Mooncoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
         <translation>Program samodejno odpre ustrezna vrata na usmerjevalniku. To deluje samo, če vaš usmerjevalnik podpira in ima omogočen UPnP.</translation>
     </message>
     <message>
@@ -1085,8 +1085,8 @@
         <translation>&amp;Dovoli dohodne povezave</translation>
     </message>
     <message>
-        <source>Connect to the Litecoin network through a SOCKS5 proxy.</source>
-        <translation>Poveži se v omrežje Litecoin preko posredniškega strežnika SOCKS5.</translation>
+        <source>Connect to the Mooncoin network through a SOCKS5 proxy.</source>
+        <translation>Poveži se v omrežje Mooncoin preko posredniškega strežnika SOCKS5.</translation>
     </message>
     <message>
         <source>&amp;Connect through SOCKS5 proxy (default proxy):</source>
@@ -1212,8 +1212,8 @@
         <translation>Oblika</translation>
     </message>
     <message>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Litecoin network after a connection is established, but this process has not completed yet.</source>
-        <translation>Prikazani podatki so morda zastareli. Program ob vzpostavitvi povezave samodejno sinhronizira denarnico z omrežjem Litecoin, a trenutno ta proces še ni zaključen.</translation>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Mooncoin network after a connection is established, but this process has not completed yet.</source>
+        <translation>Prikazani podatki so morda zastareli. Program ob vzpostavitvi povezave samodejno sinhronizira denarnico z omrežjem Mooncoin, a trenutno ta proces še ni zaključen.</translation>
     </message>
     <message>
         <source>Watch-only:</source>
@@ -1287,16 +1287,16 @@
         <translation>Napaka pri zahtevi plačila</translation>
     </message>
     <message>
-        <source>Cannot start litecoin: click-to-pay handler</source>
-        <translation>Ni mogoče zagnati rokovalca plačilnih povezav tipa litecoin:.</translation>
+        <source>Cannot start mooncoin: click-to-pay handler</source>
+        <translation>Ni mogoče zagnati rokovalca plačilnih povezav tipa mooncoin:.</translation>
     </message>
     <message>
         <source>URI handling</source>
         <translation>Rokovanje z URI</translation>
     </message>
     <message>
-        <source>'litecoin://' is not a valid URI. Use 'litecoin:' instead.</source>
-        <translation>'litecoin://' ni veljaven URI. Uporabite raje 'litecoin:' .</translation>
+        <source>'mooncoin://' is not a valid URI. Use 'mooncoin:' instead.</source>
+        <translation>'mooncoin://' ni veljaven URI. Uporabite raje 'mooncoin:' .</translation>
     </message>
     <message>
         <source>Invalid payment address %1</source>
@@ -1381,8 +1381,8 @@
         <translation>Znesek</translation>
     </message>
     <message>
-        <source>Enter a Litecoin address (e.g. %1)</source>
-        <translation>Vnesite naslov Litecoin (npr. %1):</translation>
+        <source>Enter a Mooncoin address (e.g. %1)</source>
+        <translation>Vnesite naslov Mooncoin (npr. %1):</translation>
     </message>
     <message>
         <source>%1 d</source>
@@ -1761,8 +1761,8 @@
         <translation>&amp;Sporočilo:</translation>
     </message>
     <message>
-        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Litecoin network.</source>
-        <translation>Neobvezno sporočilo kot priponka zahtevku za plačilo, ki bo prikazano, ko bo zahtevek odprt. Opomba: Opravljeno plačilo.prek omrežja Litecoin tega sporočila ne bo vsebovalo.</translation>
+        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Mooncoin network.</source>
+        <translation>Neobvezno sporočilo kot priponka zahtevku za plačilo, ki bo prikazano, ko bo zahtevek odprt. Opomba: Opravljeno plačilo.prek omrežja Mooncoin tega sporočila ne bo vsebovalo.</translation>
     </message>
     <message>
         <source>An optional label to associate with the new receiving address.</source>
@@ -2126,8 +2126,8 @@
         <translation>Zahtevek za plačilo je potekel.</translation>
     </message>
     <message>
-        <source>Warning: Invalid Litecoin address</source>
-        <translation>Opozorilo: Neveljaven Litecoin naslov</translation>
+        <source>Warning: Invalid Mooncoin address</source>
+        <translation>Opozorilo: Neveljaven Mooncoin naslov</translation>
     </message>
     <message>
         <source>(no label)</source>
@@ -2157,8 +2157,8 @@
         <translation>Plačilo je navadne vrste.</translation>
     </message>
     <message>
-        <source>The Litecoin address to send the payment to</source>
-        <translation>Naslov Litecoin, na katerega bo plačilo poslano</translation>
+        <source>The Mooncoin address to send the payment to</source>
+        <translation>Naslov Mooncoin, na katerega bo plačilo poslano</translation>
     </message>
     <message>
         <source>Alt+A</source>
@@ -2177,7 +2177,7 @@
         <translation>Izpraznite vsebino polja</translation>
     </message>
     <message>
-        <source>The fee will be deducted from the amount being sent. The recipient will receive less litecoins than you enter in the amount field. If multiple recipients are selected, the fee is split equally.</source>
+        <source>The fee will be deducted from the amount being sent. The recipient will receive less mooncoins than you enter in the amount field. If multiple recipients are selected, the fee is split equally.</source>
         <translation>Znesek plačila bo zmanjšan za znesek provizije. Prejemnik bo prejel manjše število kovancev, kot je bil vnešeni znesek. Če je prejemnikov več, bo provizija med njih enakomerno porazdeljena.</translation>
     </message>
     <message>
@@ -2205,8 +2205,8 @@
         <translation>Če vnesete oznako za zgornji naslov, se bo skupaj z naslovom shranila v imenk že uporabljenih naslovov</translation>
     </message>
     <message>
-        <source>A message that was attached to the litecoin: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Litecoin network.</source>
-        <translation>Sporočilo, ki ste ga pripeli na URI tipa litecoin:. Shranjeno bo skupaj s podatki o transakciji. Opomba: Sporočilo ne bo poslano preko omrežja Litecoin.</translation>
+        <source>A message that was attached to the mooncoin: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Mooncoin network.</source>
+        <translation>Sporočilo, ki ste ga pripeli na URI tipa mooncoin:. Shranjeno bo skupaj s podatki o transakciji. Opomba: Sporočilo ne bo poslano preko omrežja Mooncoin.</translation>
     </message>
     <message>
         <source>Pay To:</source>
@@ -2246,12 +2246,12 @@
         <translation>&amp;Podpiši sporočilo</translation>
     </message>
     <message>
-        <source>You can sign messages/agreements with your addresses to prove you can receive litecoins sent to them. Be careful not to sign anything vague or random, as phishing attacks may try to trick you into signing your identity over to them. Only sign fully-detailed statements you agree to.</source>
+        <source>You can sign messages/agreements with your addresses to prove you can receive mooncoins sent to them. Be careful not to sign anything vague or random, as phishing attacks may try to trick you into signing your identity over to them. Only sign fully-detailed statements you agree to.</source>
         <translation>S svojimi naslovi lahko podpisujete sporočila ali pogodbe in s tem dokazujete, da na teh naslovih lahko prejemate kovance. Bodite previdni in ne podpisujte ničesar nejasnega ali naključnega, ker vas zlikovci preko ribarjenja (phishing) lahko prelisičijo, da na njih prepišete svojo identiteto. Podpisujte samo podrobno opisane izjave, s katerimi se strinjate.</translation>
     </message>
     <message>
-        <source>The Litecoin address to sign the message with</source>
-        <translation>Naslov Litecoin, s katerim podpisujete sporočilo</translation>
+        <source>The Mooncoin address to sign the message with</source>
+        <translation>Naslov Mooncoin, s katerim podpisujete sporočilo</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -2282,7 +2282,7 @@
         <translation>Kopiranje trenutnega podpisa na sistemsko odložišče.</translation>
     </message>
     <message>
-        <source>Sign the message to prove you own this Litecoin address</source>
+        <source>Sign the message to prove you own this Mooncoin address</source>
         <translation>Podpišite sporočilo, da dokažete lastništvo nad zgornjim naslovom.</translation>
     </message>
     <message>
@@ -2306,12 +2306,12 @@
         <translation>Da preverite verodostojnost sporočila, spodaj vnesite: prejemnikov naslov, prejeto sporočilo (pazljivo skopirajte vse prelome vrstic, presledke, tabulatorje ipd.,) in prejeti podpis. Da se izognete napadom tipa man-in-the-middle, vedite, da iz veljavnega podpisa ne sledi nič drugega, kot tisto, kar je navedeno v sporočilu. Podpis samo potrjuje dejstvo, da ima podpisnik v lasti prejemni naslov, ne more pa dokazati vira nobene transakcije!</translation>
     </message>
     <message>
-        <source>The Litecoin address the message was signed with</source>
-        <translation>Naslov Litecoin, s katerim je bilo sporočilo podpisano</translation>
+        <source>The Mooncoin address the message was signed with</source>
+        <translation>Naslov Mooncoin, s katerim je bilo sporočilo podpisano</translation>
     </message>
     <message>
-        <source>Verify the message to ensure it was signed with the specified Litecoin address</source>
-        <translation>Preverite, ali je bilo sporočilo v resnici podpisano z navedenim naslovom Litecoin.</translation>
+        <source>Verify the message to ensure it was signed with the specified Mooncoin address</source>
+        <translation>Preverite, ali je bilo sporočilo v resnici podpisano z navedenim naslovom Mooncoin.</translation>
     </message>
     <message>
         <source>Verify &amp;Message</source>
@@ -2790,8 +2790,8 @@
 <context>
     <name>bitcoin-core</name>
     <message>
-        <source>Litecoin Core</source>
-        <translation>Litecoin Core</translation>
+        <source>Mooncoin Core</source>
+        <translation>Mooncoin Core</translation>
     </message>
     <message>
         <source>The %s developers</source>

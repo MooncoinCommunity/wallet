@@ -47,11 +47,11 @@
     </message>
     <message>
         <source>Choose the address to send coins to</source>
-        <translation>Scegli l'indirizzo a cui inviare litecoin</translation>
+        <translation>Scegli l'indirizzo a cui inviare mooncoin</translation>
     </message>
     <message>
         <source>Choose the address to receive coins with</source>
-        <translation>Scegli l'indirizzo con cui ricevere litecoin</translation>
+        <translation>Scegli l'indirizzo con cui ricevere mooncoin</translation>
     </message>
     <message>
         <source>C&amp;hoose</source>
@@ -66,12 +66,12 @@
         <translation>Indirizzi di ricezione</translation>
     </message>
     <message>
-        <source>These are your Litecoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>Questi sono i tuoi indirizzi Litecoin per l'invio di pagamenti. Controlla sempre l'importo e l'indirizzo del beneficiario prima di inviare litecoin.</translation>
+        <source>These are your Mooncoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <translation>Questi sono i tuoi indirizzi Mooncoin per l'invio di pagamenti. Controlla sempre l'importo e l'indirizzo del beneficiario prima di inviare mooncoin.</translation>
     </message>
     <message>
-        <source>These are your Litecoin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
-        <translation>Questi sono i tuoi indirizzi Litecoin per la ricezione di pagamenti. Si raccomanda di usare un nuovo indirizzo di ricezione per ogni transazione.</translation>
+        <source>These are your Mooncoin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
+        <translation>Questi sono i tuoi indirizzi Mooncoin per la ricezione di pagamenti. Si raccomanda di usare un nuovo indirizzo di ricezione per ogni transazione.</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -176,8 +176,8 @@
         <translation>Conferma la cifratura del portafoglio</translation>
     </message>
     <message>
-        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR LITECOINS&lt;/b&gt;!</source>
-        <translation>Attenzione: Se si cifra il portamonete e si perde la passphrase &lt;b&gt;TUTTI I PROPRI LITECOIN ANDRANNO PERSI&lt;/b&gt;!</translation>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR MOONCOINS&lt;/b&gt;!</source>
+        <translation>Attenzione: Se si cifra il portamonete e si perde la passphrase &lt;b&gt;TUTTI I PROPRI MOONCOIN ANDRANNO PERSI&lt;/b&gt;!</translation>
     </message>
     <message>
         <source>Are you sure you wish to encrypt your wallet?</source>
@@ -188,8 +188,8 @@
         <translation>Portafoglio cifrato</translation>
     </message>
     <message>
-        <source>Your wallet is now encrypted. Remember that encrypting your wallet cannot fully protect your litecoins from being stolen by malware infecting your computer.</source>
-        <translation>Adesso il tuo portafoglio è criptato. Ricorda che un portafoglio criptato non protegge pienamente contro il furto di litecoin se il tuo computer viene infetto da malware.</translation>
+        <source>Your wallet is now encrypted. Remember that encrypting your wallet cannot fully protect your mooncoins from being stolen by malware infecting your computer.</source>
+        <translation>Adesso il tuo portafoglio è criptato. Ricorda che un portafoglio criptato non protegge pienamente contro il furto di mooncoin se il tuo computer viene infetto da malware.</translation>
     </message>
     <message>
         <source>IMPORTANT: Any previous backups you have made of your wallet file should be replaced with the newly generated, encrypted wallet file. For security reasons, previous backups of the unencrypted wallet file will become useless as soon as you start using the new, encrypted wallet.</source>
@@ -342,8 +342,8 @@
         <translation>Il Proxy è &lt;b&gt;abilitato&lt;/b&gt;:%1</translation>
     </message>
     <message>
-        <source>Send coins to a Litecoin address</source>
-        <translation>Invia fondi ad un indirizzo Litecoin</translation>
+        <source>Send coins to a Mooncoin address</source>
+        <translation>Invia fondi ad un indirizzo Mooncoin</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -366,8 +366,8 @@
         <translation>&amp;Verifica messaggio...</translation>
     </message>
     <message>
-        <source>Litecoin</source>
-        <translation>Litecoin</translation>
+        <source>Mooncoin</source>
+        <translation>Mooncoin</translation>
     </message>
     <message>
         <source>&amp;Send</source>
@@ -390,12 +390,12 @@
         <translation>Cifra le chiavi private che appartengono al tuo portamonete</translation>
     </message>
     <message>
-        <source>Sign messages with your Litecoin addresses to prove you own them</source>
-        <translation>Firma messaggi con i tuoi indirizzi Litecoin per dimostrarne il possesso</translation>
+        <source>Sign messages with your Mooncoin addresses to prove you own them</source>
+        <translation>Firma messaggi con i tuoi indirizzi Mooncoin per dimostrarne il possesso</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified Litecoin addresses</source>
-        <translation>Verifica che i messaggi siano stati firmati con gli indirizzi Litecoin specificati</translation>
+        <source>Verify messages to ensure they were signed with specified Mooncoin addresses</source>
+        <translation>Verifica che i messaggi siano stati firmati con gli indirizzi Mooncoin specificati</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -414,8 +414,8 @@
         <translation>Barra degli strumenti</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and litecoin: URIs)</source>
-        <translation>Richiedi pagamenti (genera codici QR e litecoin: URI)</translation>
+        <source>Request payments (generates QR codes and mooncoin: URIs)</source>
+        <translation>Richiedi pagamenti (genera codici QR e mooncoin: URI)</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>
@@ -426,16 +426,16 @@
         <translation>Mostra la lista degli indirizzi di ricezione utilizzati</translation>
     </message>
     <message>
-        <source>Open a litecoin: URI or payment request</source>
-        <translation>Apri un litecoin: URI o una richiesta di pagamento</translation>
+        <source>Open a mooncoin: URI or payment request</source>
+        <translation>Apri un mooncoin: URI o una richiesta di pagamento</translation>
     </message>
     <message>
         <source>&amp;Command-line options</source>
         <translation>Opzioni della riga di &amp;comando</translation>
     </message>
     <message numerus="yes">
-        <source>%n active connection(s) to Litecoin network</source>
-        <translation><numerusform>%n connessione attiva alla rete Litecoin</numerusform><numerusform>%n connessioni alla rete Litecoin attive</numerusform></translation>
+        <source>%n active connection(s) to Mooncoin network</source>
+        <translation><numerusform>%n connessione attiva alla rete Mooncoin</numerusform><numerusform>%n connessioni alla rete Mooncoin attive</numerusform></translation>
     </message>
     <message>
         <source>Indexing blocks on disk...</source>
@@ -502,8 +502,8 @@
         <translation>Chiudi il portafoglio</translation>
     </message>
     <message>
-        <source>Show the %1 help message to get a list with possible Litecoin command-line options</source>
-        <translation>Mostra il messaggio di aiuto di %1 per ottenere una lista di opzioni di comando per Litecoin </translation>
+        <source>Show the %1 help message to get a list with possible Mooncoin command-line options</source>
+        <translation>Mostra il messaggio di aiuto di %1 per ottenere una lista di opzioni di comando per Mooncoin </translation>
     </message>
     <message>
         <source>default wallet</source>
@@ -614,8 +614,8 @@
         <translation>Il portamonete è &lt;b&gt;cifrato&lt;/b&gt; ed attualmente &lt;b&gt;bloccato&lt;/b&gt;</translation>
     </message>
     <message>
-        <source>A fatal error occurred. Litecoin can no longer continue safely and will quit.</source>
-        <translation>Si è verificato un errore critico. Litecoin non può più funzionare in maniera sicura e verrà chiuso.</translation>
+        <source>A fatal error occurred. Mooncoin can no longer continue safely and will quit.</source>
+        <translation>Si è verificato un errore critico. Mooncoin non può più funzionare in maniera sicura e verrà chiuso.</translation>
     </message>
 </context>
 <context>
@@ -804,8 +804,8 @@
         <translation>Modifica indirizzo d'invio</translation>
     </message>
     <message>
-        <source>The entered address "%1" is not a valid Litecoin address.</source>
-        <translation>L'indirizzo inserito "%1" non è un indirizzo litecoin valido.</translation>
+        <source>The entered address "%1" is not a valid Mooncoin address.</source>
+        <translation>L'indirizzo inserito "%1" non è un indirizzo mooncoin valido.</translation>
     </message>
     <message>
         <source>Address "%1" already exists as a receiving address with label "%2" and so cannot be added as a sending address.</source>
@@ -901,8 +901,8 @@
         <translation>Usa una cartella dati personalizzata:</translation>
     </message>
     <message>
-        <source>Litecoin</source>
-        <translation>Litecoin</translation>
+        <source>Mooncoin</source>
+        <translation>Mooncoin</translation>
     </message>
     <message>
         <source>At least %1 GB of data will be stored in this directory, and it will grow over time.</source>
@@ -913,8 +913,8 @@
         <translation>Verranno salvati circa %1 GB di dati in questa cartella.</translation>
     </message>
     <message>
-        <source>%1 will download and store a copy of the Litecoin block chain.</source>
-        <translation>%1 scaricherà e salverà una copia della block chain di Litecoin.</translation>
+        <source>%1 will download and store a copy of the Mooncoin block chain.</source>
+        <translation>%1 scaricherà e salverà una copia della block chain di Mooncoin.</translation>
     </message>
     <message>
         <source>The wallet will also be stored in this directory.</source>
@@ -944,12 +944,12 @@
         <translation>Modulo</translation>
     </message>
     <message>
-        <source>Recent transactions may not yet be visible, and therefore your wallet's balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the litecoin network, as detailed below.</source>
-        <translation>Transazioni recenti potrebbero non essere visibili ancora, perciò il saldo del tuo portafoglio potrebbe non essere corretto. Questa informazione risulterà corretta quando il tuo portafoglio avrà terminato la sincronizzazione con la rete litecoin, come indicato in dettaglio più sotto.</translation>
+        <source>Recent transactions may not yet be visible, and therefore your wallet's balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the mooncoin network, as detailed below.</source>
+        <translation>Transazioni recenti potrebbero non essere visibili ancora, perciò il saldo del tuo portafoglio potrebbe non essere corretto. Questa informazione risulterà corretta quando il tuo portafoglio avrà terminato la sincronizzazione con la rete mooncoin, come indicato in dettaglio più sotto.</translation>
     </message>
     <message>
-        <source>Attempting to spend litecoins that are affected by not-yet-displayed transactions will not be accepted by the network.</source>
-        <translation>Il tentativo di spendere litecoin legati a transazioni non ancora visualizzate non verrà accettato dalla rete.</translation>
+        <source>Attempting to spend mooncoins that are affected by not-yet-displayed transactions will not be accepted by the network.</source>
+        <translation>Il tentativo di spendere mooncoin legati a transazioni non ancora visualizzate non verrà accettato dalla rete.</translation>
     </message>
     <message>
         <source>Number of blocks left</source>
@@ -1131,8 +1131,8 @@ Per specificare più URL separarli con una barra verticale "|".</translation>
         <translation>&amp;Spendi resti non confermati</translation>
     </message>
     <message>
-        <source>Automatically open the Litecoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation>Apri automaticamente la porta del client Litecoin sul router. Il protocollo UPnP deve essere supportato da parte del router ed attivo.</translation>
+        <source>Automatically open the Mooncoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation>Apri automaticamente la porta del client Mooncoin sul router. Il protocollo UPnP deve essere supportato da parte del router ed attivo.</translation>
     </message>
     <message>
         <source>Map port using &amp;UPnP</source>
@@ -1147,8 +1147,8 @@ Per specificare più URL separarli con una barra verticale "|".</translation>
         <translation>Accetta connessioni in entrata</translation>
     </message>
     <message>
-        <source>Connect to the Litecoin network through a SOCKS5 proxy.</source>
-        <translation>Connessione alla rete Litecoin attraverso un proxy SOCKS5.</translation>
+        <source>Connect to the Mooncoin network through a SOCKS5 proxy.</source>
+        <translation>Connessione alla rete Mooncoin attraverso un proxy SOCKS5.</translation>
     </message>
     <message>
         <source>&amp;Connect through SOCKS5 proxy (default proxy):</source>
@@ -1183,8 +1183,8 @@ Per specificare più URL separarli con una barra verticale "|".</translation>
         <translation>Tor</translation>
     </message>
     <message>
-        <source>Connect to the Litecoin network through a separate SOCKS5 proxy for Tor hidden services.</source>
-        <translation>Connette alla rete Litecoin attraverso un proxy SOCKS5 separato per Tor.</translation>
+        <source>Connect to the Mooncoin network through a separate SOCKS5 proxy for Tor hidden services.</source>
+        <translation>Connette alla rete Mooncoin attraverso un proxy SOCKS5 separato per Tor.</translation>
     </message>
     <message>
         <source>&amp;Window</source>
@@ -1220,7 +1220,7 @@ Per specificare più URL separarli con una barra verticale "|".</translation>
     </message>
     <message>
         <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
-        <translation>Scegli l'unità di suddivisione predefinita da utilizzare per l'interfaccia e per l'invio di litecoin.</translation>
+        <translation>Scegli l'unità di suddivisione predefinita da utilizzare per l'interfaccia e per l'invio di mooncoin.</translation>
     </message>
     <message>
         <source>Whether to show coin control features or not.</source>
@@ -1294,8 +1294,8 @@ Per specificare più URL separarli con una barra verticale "|".</translation>
         <translation>Modulo</translation>
     </message>
     <message>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Litecoin network after a connection is established, but this process has not completed yet.</source>
-        <translation>Le informazioni visualizzate potrebbero non essere aggiornate. Il portafoglio si sincronizza automaticamente con la rete Litecoin una volta stabilita una connessione, ma questo processo non è ancora stato completato.</translation>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Mooncoin network after a connection is established, but this process has not completed yet.</source>
+        <translation>Le informazioni visualizzate potrebbero non essere aggiornate. Il portafoglio si sincronizza automaticamente con la rete Mooncoin una volta stabilita una connessione, ma questo processo non è ancora stato completato.</translation>
     </message>
     <message>
         <source>Watch-only:</source>
@@ -1369,16 +1369,16 @@ Per specificare più URL separarli con una barra verticale "|".</translation>
         <translation>Errore di richiesta di pagamento</translation>
     </message>
     <message>
-        <source>Cannot start litecoin: click-to-pay handler</source>
-        <translation>Impossibile avviare litecoin: gestore click-to-pay</translation>
+        <source>Cannot start mooncoin: click-to-pay handler</source>
+        <translation>Impossibile avviare mooncoin: gestore click-to-pay</translation>
     </message>
     <message>
         <source>URI handling</source>
         <translation>Gestione URI</translation>
     </message>
     <message>
-        <source>'litecoin://' is not a valid URI. Use 'litecoin:' instead.</source>
-        <translation>'litecoin://' non è un URI valido. Usa invece 'litecoin:'.</translation>
+        <source>'mooncoin://' is not a valid URI. Use 'mooncoin:' instead.</source>
+        <translation>'mooncoin://' non è un URI valido. Usa invece 'mooncoin:'.</translation>
     </message>
     <message>
         <source>You are using a BIP70 URL which will be unsupported in the future.</source>
@@ -1397,8 +1397,8 @@ Per specificare più URL separarli con una barra verticale "|".</translation>
         <translation>Indirizzo di pagamento non valido %1</translation>
     </message>
     <message>
-        <source>URI cannot be parsed! This can be caused by an invalid Litecoin address or malformed URI parameters.</source>
-        <translation>Impossibile interpretare l'URI! I parametri dell'URI o l'indirizzo Litecoin potrebbero non essere corretti.</translation>
+        <source>URI cannot be parsed! This can be caused by an invalid Mooncoin address or malformed URI parameters.</source>
+        <translation>Impossibile interpretare l'URI! I parametri dell'URI o l'indirizzo Mooncoin potrebbero non essere corretti.</translation>
     </message>
     <message>
         <source>Payment request file handling</source>
@@ -1499,8 +1499,8 @@ Per specificare più URL separarli con una barra verticale "|".</translation>
         <translation>Importo</translation>
     </message>
     <message>
-        <source>Enter a Litecoin address (e.g. %1)</source>
-        <translation>Inserisci un indirizzo Litecoin (ad es. %1)</translation>
+        <source>Enter a Mooncoin address (e.g. %1)</source>
+        <translation>Inserisci un indirizzo Mooncoin (ad es. %1)</translation>
     </message>
     <message>
         <source>%1 d</source>
@@ -1955,8 +1955,8 @@ Per specificare più URL separarli con una barra verticale "|".</translation>
         <translation>&amp;Messaggio:</translation>
     </message>
     <message>
-        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Litecoin network.</source>
-        <translation>Un messaggio opzionale da allegare e mostrare all'apertura della richiesta di pagamento. Nota: Il messaggio non sarà inviato con il pagamento sulla rete Litecoin.</translation>
+        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Mooncoin network.</source>
+        <translation>Un messaggio opzionale da allegare e mostrare all'apertura della richiesta di pagamento. Nota: Il messaggio non sarà inviato con il pagamento sulla rete Mooncoin.</translation>
     </message>
     <message>
         <source>An optional label to associate with the new receiving address.</source>
@@ -2121,7 +2121,7 @@ Per specificare più URL separarli con una barra verticale "|".</translation>
     <name>SendCoinsDialog</name>
     <message>
         <source>Send Coins</source>
-        <translation>Invia Litecoin</translation>
+        <translation>Invia Mooncoin</translation>
     </message>
     <message>
         <source>Coin Control Features</source>
@@ -2236,8 +2236,8 @@ Nota: poiché la commissione è calcolata su base per byte, una commissione di "
         <translation>Trascurabile:</translation>
     </message>
     <message>
-        <source>When there is less transaction volume than space in the blocks, miners as well as relaying nodes may enforce a minimum fee. Paying only this minimum fee is just fine, but be aware that this can result in a never confirming transaction once there is more demand for litecoin transactions than the network can process.</source>
-        <translation>Quando il volume delle transazioni è minore dello spazio nei blocchi, i minatori e in nodi di relay potrebbero imporre una commissione minima. Va benissimo pagare solo questa commissione minima, ma tieni presente che questo potrebbe risultare in una transazione che, se la richiesta di transazioni litecoin dovesse superare la velocità con cui la rete riesce ad elaborarle, non viene mai confermata.</translation>
+        <source>When there is less transaction volume than space in the blocks, miners as well as relaying nodes may enforce a minimum fee. Paying only this minimum fee is just fine, but be aware that this can result in a never confirming transaction once there is more demand for mooncoin transactions than the network can process.</source>
+        <translation>Quando il volume delle transazioni è minore dello spazio nei blocchi, i minatori e in nodi di relay potrebbero imporre una commissione minima. Va benissimo pagare solo questa commissione minima, ma tieni presente che questo potrebbe risultare in una transazione che, se la richiesta di transazioni mooncoin dovesse superare la velocità con cui la rete riesce ad elaborarle, non viene mai confermata.</translation>
     </message>
     <message>
         <source>A too low fee might result in a never confirming transaction (read the tooltip)</source>
@@ -2384,8 +2384,8 @@ Nota: poiché la commissione è calcolata su base per byte, una commissione di "
         <translation><numerusform>Inizio delle conferme stimato entro %n blocchi.</numerusform><numerusform>Inizio delle conferme stimato entro %n blocchi.</numerusform></translation>
     </message>
     <message>
-        <source>Warning: Invalid Litecoin address</source>
-        <translation>Attenzione: Indirizzo Litecoin non valido</translation>
+        <source>Warning: Invalid Mooncoin address</source>
+        <translation>Attenzione: Indirizzo Mooncoin non valido</translation>
     </message>
     <message>
         <source>Warning: Unknown change address</source>
@@ -2427,8 +2427,8 @@ Nota: poiché la commissione è calcolata su base per byte, una commissione di "
         <translation>Questo è un normale pagamento.</translation>
     </message>
     <message>
-        <source>The Litecoin address to send the payment to</source>
-        <translation>L'indirizzo Litecoin a cui vuoi inviare il pagamento</translation>
+        <source>The Mooncoin address to send the payment to</source>
+        <translation>L'indirizzo Mooncoin a cui vuoi inviare il pagamento</translation>
     </message>
     <message>
         <source>Alt+A</source>
@@ -2447,8 +2447,8 @@ Nota: poiché la commissione è calcolata su base per byte, una commissione di "
         <translation>Rimuovi questa voce</translation>
     </message>
     <message>
-        <source>The fee will be deducted from the amount being sent. The recipient will receive less litecoins than you enter in the amount field. If multiple recipients are selected, the fee is split equally.</source>
-        <translation>La commissione sarà sottratta dall'importo che si sta inviando. Il beneficiario riceverà un totale di litecoin inferiore al valore digitato. Nel caso in cui siano stati selezionati più beneficiari la commissione sarà suddivisa in parti uguali.</translation>
+        <source>The fee will be deducted from the amount being sent. The recipient will receive less mooncoins than you enter in the amount field. If multiple recipients are selected, the fee is split equally.</source>
+        <translation>La commissione sarà sottratta dall'importo che si sta inviando. Il beneficiario riceverà un totale di mooncoin inferiore al valore digitato. Nel caso in cui siano stati selezionati più beneficiari la commissione sarà suddivisa in parti uguali.</translation>
     </message>
     <message>
         <source>S&amp;ubtract fee from amount</source>
@@ -2475,8 +2475,8 @@ Nota: poiché la commissione è calcolata su base per byte, una commissione di "
         <translation>Inserisci un'etichetta per questo indirizzo per aggiungerlo alla lista degli indirizzi utilizzati</translation>
     </message>
     <message>
-        <source>A message that was attached to the litecoin: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Litecoin network.</source>
-        <translation>Messaggio incluso nel litecoin URI e che sarà memorizzato con la transazione per tuo riferimento. Nota: Questo messaggio non sarà inviato attraverso la rete Litecoin.</translation>
+        <source>A message that was attached to the mooncoin: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Mooncoin network.</source>
+        <translation>Messaggio incluso nel mooncoin URI e che sarà memorizzato con la transazione per tuo riferimento. Nota: Questo messaggio non sarà inviato attraverso la rete Mooncoin.</translation>
     </message>
     <message>
         <source>Pay To:</source>
@@ -2520,12 +2520,12 @@ Nota: poiché la commissione è calcolata su base per byte, una commissione di "
         <translation>&amp;Firma Messaggio</translation>
     </message>
     <message>
-        <source>You can sign messages/agreements with your addresses to prove you can receive litecoins sent to them. Be careful not to sign anything vague or random, as phishing attacks may try to trick you into signing your identity over to them. Only sign fully-detailed statements you agree to.</source>
-        <translation>È possibile firmare messaggi/accordi con i propri indirizzi in modo da dimostrare di poter ricevere litecoin attraverso di essi. Presta attenzione a non firmare dichiarazioni vaghe o casuali, perché attacchi di phishing potrebbero cercare di indurti ad apporre la firma su di esse. Firma esclusivamente dichiarazioni completamente dettagliate e delle quali condividi in pieno il contenuto.</translation>
+        <source>You can sign messages/agreements with your addresses to prove you can receive mooncoins sent to them. Be careful not to sign anything vague or random, as phishing attacks may try to trick you into signing your identity over to them. Only sign fully-detailed statements you agree to.</source>
+        <translation>È possibile firmare messaggi/accordi con i propri indirizzi in modo da dimostrare di poter ricevere mooncoin attraverso di essi. Presta attenzione a non firmare dichiarazioni vaghe o casuali, perché attacchi di phishing potrebbero cercare di indurti ad apporre la firma su di esse. Firma esclusivamente dichiarazioni completamente dettagliate e delle quali condividi in pieno il contenuto.</translation>
     </message>
     <message>
-        <source>The Litecoin address to sign the message with</source>
-        <translation>Indirizzo Litecoin da utilizzare per firmare il messaggio</translation>
+        <source>The Mooncoin address to sign the message with</source>
+        <translation>Indirizzo Mooncoin da utilizzare per firmare il messaggio</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -2556,8 +2556,8 @@ Nota: poiché la commissione è calcolata su base per byte, una commissione di "
         <translation>Copia la firma corrente nella clipboard</translation>
     </message>
     <message>
-        <source>Sign the message to prove you own this Litecoin address</source>
-        <translation>Firma un messaggio per dimostrare di possedere questo indirizzo Litecoin</translation>
+        <source>Sign the message to prove you own this Mooncoin address</source>
+        <translation>Firma un messaggio per dimostrare di possedere questo indirizzo Mooncoin</translation>
     </message>
     <message>
         <source>Sign &amp;Message</source>
@@ -2580,11 +2580,11 @@ Nota: poiché la commissione è calcolata su base per byte, una commissione di "
         <translation>Per verificare il messaggio inserire l'indirizzo del firmatario, il messaggio e la firma nei campi sottostanti, assicurandosi di copiare esattamente anche ritorni a capo, spazi, tabulazioni, etc.. Si raccomanda di non lasciarsi fuorviare dalla firma a leggere più di quanto non sia riportato nel testo del messaggio stesso, in modo da evitare di cadere vittima di attacchi di tipo man-in-the-middle. Si ricorda che la verifica della firma dimostra soltanto che il firmatario può ricevere pagamenti con l'indirizzo corrispondente, non prova l'invio di alcuna transazione.</translation>
     </message>
     <message>
-        <source>The Litecoin address the message was signed with</source>
-        <translation>L'indirizzo Litecoin con cui è stato contrassegnato il messaggio</translation>
+        <source>The Mooncoin address the message was signed with</source>
+        <translation>L'indirizzo Mooncoin con cui è stato contrassegnato il messaggio</translation>
     </message>
     <message>
-        <source>Verify the message to ensure it was signed with the specified Litecoin address</source>
+        <source>Verify the message to ensure it was signed with the specified Mooncoin address</source>
         <translation>Verifica il messaggio per accertare che sia stato firmato con l'indirizzo specificato</translation>
     </message>
     <message>
@@ -2609,7 +2609,7 @@ Nota: poiché la commissione è calcolata su base per byte, una commissione di "
     </message>
     <message>
         <source>The entered address does not refer to a key.</source>
-        <translation>L'indirizzo litecoin inserito non è associato a nessuna chiave.</translation>
+        <translation>L'indirizzo mooncoin inserito non è associato a nessuna chiave.</translation>
     </message>
     <message>
         <source>Wallet unlock was cancelled.</source>
@@ -2798,7 +2798,7 @@ Nota: poiché la commissione è calcolata su base per byte, una commissione di "
     </message>
     <message>
         <source>Generated coins must mature %1 blocks before they can be spent. When you generated this block, it was broadcast to the network to be added to the block chain. If it fails to get into the chain, its state will change to "not accepted" and it won't be spendable. This may occasionally happen if another node generates a block within a few seconds of yours.</source>
-        <translation>I litecoin generati devono maturare %1 blocchi prima di poter essere spesi. Quando hai generato questo blocco, è stato trasmesso alla rete per essere aggiunto alla block chain. Se l'inserimento nella catena avrà esito negativo, il suo stato cambierà a "non accettato" e non sarà spendibile. Talvolta ciò può accadere anche nel caso in cui un altro nodo generi un blocco entro pochi secondi dal tuo.</translation>
+        <translation>I mooncoin generati devono maturare %1 blocchi prima di poter essere spesi. Quando hai generato questo blocco, è stato trasmesso alla rete per essere aggiunto alla block chain. Se l'inserimento nella catena avrà esito negativo, il suo stato cambierà a "non accettato" e non sarà spendibile. Talvolta ciò può accadere anche nel caso in cui un altro nodo generi un blocco entro pochi secondi dal tuo.</translation>
     </message>
     <message>
         <source>Debug information</source>
@@ -3131,7 +3131,7 @@ Nota: poiché la commissione è calcolata su base per byte, una commissione di "
     <name>WalletModel</name>
     <message>
         <source>Send Coins</source>
-        <translation>Invia Litecoin</translation>
+        <translation>Invia Mooncoin</translation>
     </message>
     <message>
         <source>Fee bump error</source>
@@ -3244,8 +3244,8 @@ Nota: poiché la commissione è calcolata su base per byte, una commissione di "
         <translation>Impossibile avviare il server HTTP. Dettagli nel log di debug.</translation>
     </message>
     <message>
-        <source>Litecoin Core</source>
-        <translation>Litecoin Core</translation>
+        <source>Mooncoin Core</source>
+        <translation>Mooncoin Core</translation>
     </message>
     <message>
         <source>The %s developers</source>

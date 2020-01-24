@@ -62,12 +62,12 @@
         <translation>ที่อยู่ในการรับ</translation>
     </message>
     <message>
-        <source>These are your Litecoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>ที่อยู่ Litecoin ของคุณสำหรับการส่งการชำระเงิน โปรดตรวจสอบจำนวนเงินและที่อยู่รับก่อนที่จะส่งเหรียญ</translation>
+        <source>These are your Mooncoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <translation>ที่อยู่ Mooncoin ของคุณสำหรับการส่งการชำระเงิน โปรดตรวจสอบจำนวนเงินและที่อยู่รับก่อนที่จะส่งเหรียญ</translation>
     </message>
     <message>
-        <source>These are your Litecoin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
-        <translation>ที่อยู่ Litecoin ของคุณสำหรับการรับเงิน แนะนำให้ใช้ที่อยู่รับใหม่สำหรับแต่ละธุรกรรม</translation>
+        <source>These are your Mooncoin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
+        <translation>ที่อยู่ Mooncoin ของคุณสำหรับการรับเงิน แนะนำให้ใช้ที่อยู่รับใหม่สำหรับแต่ละธุรกรรม</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -137,7 +137,7 @@
     </message>
     <message>
         <source>Unlock wallet</source>
-        <translation>ปลดล็อค กระเป๋าสตางค์ </translation>
+        <translation>ปลดล็อค กระเป๋าสตางค์ </translation>
     </message>
     <message>
         <source>This operation needs your wallet passphrase to decrypt the wallet.</source>

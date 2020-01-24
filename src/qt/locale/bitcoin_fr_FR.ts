@@ -47,11 +47,11 @@
     </message>
     <message>
         <source>Choose the address to send coins to</source>
-        <translation>Choisissez une adresse où envoyer les litecoins</translation>
+        <translation>Choisissez une adresse où envoyer les mooncoins</translation>
     </message>
     <message>
         <source>Choose the address to receive coins with</source>
-        <translation>Choisissez une adresse où recevoir les litecoins</translation>
+        <translation>Choisissez une adresse où recevoir les mooncoins</translation>
     </message>
     <message>
         <source>C&amp;hoose</source>
@@ -66,12 +66,12 @@
         <translation>Adresses de réception</translation>
     </message>
     <message>
-        <source>These are your Litecoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>Ceci sont vos addresses Litecoin pour envoyer vos paiements. Il faut toujours verifier les montants et l'addresse de reception avant de valider la transaction.</translation>
+        <source>These are your Mooncoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <translation>Ceci sont vos addresses Mooncoin pour envoyer vos paiements. Il faut toujours verifier les montants et l'addresse de reception avant de valider la transaction.</translation>
     </message>
     <message>
-        <source>These are your Litecoin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
-        <translation>Ceci sont vos addresses Litecoin pour recevoir vos paiements. Il est recommandé d'utiliser une nouvelle adresse de recepetion pour chaque transaction</translation>
+        <source>These are your Mooncoin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
+        <translation>Ceci sont vos addresses Mooncoin pour recevoir vos paiements. Il est recommandé d'utiliser une nouvelle adresse de recepetion pour chaque transaction</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -176,8 +176,8 @@
         <translation>Confirmer le chiffrement du porte-monnaie</translation>
     </message>
     <message>
-        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR LITECOINS&lt;/b&gt;!</source>
-        <translation>Attention : Si vous chiffrez votre portefeuille et que vous perdez votre mot de passe vous &lt;b&gt; PERDREZ TOUS VOS LITECOINS&lt;/b&gt; !</translation>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR MOONCOINS&lt;/b&gt;!</source>
+        <translation>Attention : Si vous chiffrez votre portefeuille et que vous perdez votre mot de passe vous &lt;b&gt; PERDREZ TOUS VOS MOONCOINS&lt;/b&gt; !</translation>
     </message>
     <message>
         <source>Are you sure you wish to encrypt your wallet?</source>
@@ -188,8 +188,8 @@
         <translation>Portefeuille chiffré</translation>
     </message>
     <message>
-        <source>Your wallet is now encrypted. Remember that encrypting your wallet cannot fully protect your litecoins from being stolen by malware infecting your computer.</source>
-        <translation>Le porte-monnaie a été chiffré. N'oubliez pas que le chiffrement de votre porte-monnaie ne peut pas entièrement protéger vos litecoins contre le vol par un logiciel malveillant qui infecterait votre ordinateur.</translation>
+        <source>Your wallet is now encrypted. Remember that encrypting your wallet cannot fully protect your mooncoins from being stolen by malware infecting your computer.</source>
+        <translation>Le porte-monnaie a été chiffré. N'oubliez pas que le chiffrement de votre porte-monnaie ne peut pas entièrement protéger vos mooncoins contre le vol par un logiciel malveillant qui infecterait votre ordinateur.</translation>
     </message>
     <message>
         <source>IMPORTANT: Any previous backups you have made of your wallet file should be replaced with the newly generated, encrypted wallet file. For security reasons, previous backups of the unencrypted wallet file will become useless as soon as you start using the new, encrypted wallet.</source>
@@ -342,8 +342,8 @@
         <translation>Le proxy est &lt;b&gt;activé&lt;/b&gt; : %1</translation>
     </message>
     <message>
-        <source>Send coins to a Litecoin address</source>
-        <translation>Envoyer des pièces à une adresse Litecoin</translation>
+        <source>Send coins to a Mooncoin address</source>
+        <translation>Envoyer des pièces à une adresse Mooncoin</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -366,8 +366,8 @@
         <translation>&amp;Vérification du message</translation>
     </message>
     <message>
-        <source>Litecoin</source>
-        <translation>Litecoin</translation>
+        <source>Mooncoin</source>
+        <translation>Mooncoin</translation>
     </message>
     <message>
         <source>&amp;Send</source>
@@ -390,12 +390,12 @@
         <translation>Crypter les clé privées qui appartiennent votre portefeuille</translation>
     </message>
     <message>
-        <source>Sign messages with your Litecoin addresses to prove you own them</source>
-        <translation>Signer vos messages avec vos adresses Litecoin pour prouver que vous les détenez</translation>
+        <source>Sign messages with your Mooncoin addresses to prove you own them</source>
+        <translation>Signer vos messages avec vos adresses Mooncoin pour prouver que vous les détenez</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified Litecoin addresses</source>
-        <translation>Vérifier les messages pour s'assurer qu'ils soient signés avec les adresses Litecoin spécifiées</translation>
+        <source>Verify messages to ensure they were signed with specified Mooncoin addresses</source>
+        <translation>Vérifier les messages pour s'assurer qu'ils soient signés avec les adresses Mooncoin spécifiées</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -414,8 +414,8 @@
         <translation>Barre d'outils des onglets</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and litecoin: URIs)</source>
-        <translation>Demander des paiements (générer QR codes et litecoin: URIs)</translation>
+        <source>Request payments (generates QR codes and mooncoin: URIs)</source>
+        <translation>Demander des paiements (générer QR codes et mooncoin: URIs)</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>
@@ -426,16 +426,16 @@
         <translation>Afficher la liste des labels et adresses de réception utilisées</translation>
     </message>
     <message>
-        <source>Open a litecoin: URI or payment request</source>
-        <translation>Ouvrir un litecoin: URI ou demande de paiement</translation>
+        <source>Open a mooncoin: URI or payment request</source>
+        <translation>Ouvrir un mooncoin: URI ou demande de paiement</translation>
     </message>
     <message>
         <source>&amp;Command-line options</source>
         <translation>&amp;Options de ligne de commande</translation>
     </message>
     <message numerus="yes">
-        <source>%n active connection(s) to Litecoin network</source>
-        <translation><numerusform>%n connexion active avec le réseau Litecoin</numerusform><numerusform>%n connexions actives avec le réseau Litecoin</numerusform></translation>
+        <source>%n active connection(s) to Mooncoin network</source>
+        <translation><numerusform>%n connexion active avec le réseau Mooncoin</numerusform><numerusform>%n connexions actives avec le réseau Mooncoin</numerusform></translation>
     </message>
     <message>
         <source>Indexing blocks on disk...</source>
@@ -498,8 +498,8 @@
         <translation>Fermer portefeuille</translation>
     </message>
     <message>
-        <source>Show the %1 help message to get a list with possible Litecoin command-line options</source>
-        <translation>Afficher le %1 message d'aide pour récupérer une liste des options de ligne de commande Litecoin</translation>
+        <source>Show the %1 help message to get a list with possible Mooncoin command-line options</source>
+        <translation>Afficher le %1 message d'aide pour récupérer une liste des options de ligne de commande Mooncoin</translation>
     </message>
     <message>
         <source>default wallet</source>
@@ -590,8 +590,8 @@
         <translation>Le porte-monnaie est &lt;b&gt;chiffré&lt;/b&gt; et est actuellement &lt;b&gt;verrouillé&lt;/b&gt;</translation>
     </message>
     <message>
-        <source>A fatal error occurred. Litecoin can no longer continue safely and will quit.</source>
-        <translation>Une erreur fatale a eu lieu. Litecoin ne peut plus continuer en toute sécurité et va s'éteindre</translation>
+        <source>A fatal error occurred. Mooncoin can no longer continue safely and will quit.</source>
+        <translation>Une erreur fatale a eu lieu. Mooncoin ne peut plus continuer en toute sécurité et va s'éteindre</translation>
     </message>
 </context>
 <context>
@@ -780,8 +780,8 @@
         <translation>Éditer l'adresse d'envoi</translation>
     </message>
     <message>
-        <source>The entered address "%1" is not a valid Litecoin address.</source>
-        <translation>L'adresse entrée "%1" n'est pas une adresse Litecoin valide.</translation>
+        <source>The entered address "%1" is not a valid Mooncoin address.</source>
+        <translation>L'adresse entrée "%1" n'est pas une adresse Mooncoin valide.</translation>
     </message>
     <message>
         <source>Could not unlock wallet.</source>
@@ -853,8 +853,8 @@
         <translation>Utiliser votre propre répertoire</translation>
     </message>
     <message>
-        <source>Litecoin</source>
-        <translation>Litecoin</translation>
+        <source>Mooncoin</source>
+        <translation>Mooncoin</translation>
     </message>
     <message>
         <source>At least %1 GB of data will be stored in this directory, and it will grow over time.</source>
@@ -946,8 +946,8 @@
         <translation>Expert</translation>
     </message>
     <message>
-        <source>Automatically open the Litecoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation>Ouvrir le port du client Litecoin automatiquement sur le routeur. Cela ne fonctionne que si votre routeur supporte l'UPnP et si la fonctionnalité est activée.</translation>
+        <source>Automatically open the Mooncoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation>Ouvrir le port du client Mooncoin automatiquement sur le routeur. Cela ne fonctionne que si votre routeur supporte l'UPnP et si la fonctionnalité est activée.</translation>
     </message>
     <message>
         <source>Map port using &amp;UPnP</source>
@@ -1146,8 +1146,8 @@
         <translation>Montant</translation>
     </message>
     <message>
-        <source>Enter a Litecoin address (e.g. %1)</source>
-        <translation>Entrer une adresse Litecoin (e.g. %1)</translation>
+        <source>Enter a Mooncoin address (e.g. %1)</source>
+        <translation>Entrer une adresse Mooncoin (e.g. %1)</translation>
     </message>
     <message>
         <source>%1 d</source>
@@ -1707,8 +1707,8 @@
         <translation>Demande de paiement expirée.</translation>
     </message>
     <message>
-        <source>Warning: Invalid Litecoin address</source>
-        <translation>Attention: Adresse Litecoin Invalide</translation>
+        <source>Warning: Invalid Mooncoin address</source>
+        <translation>Attention: Adresse Mooncoin Invalide</translation>
     </message>
     <message>
         <source>(no label)</source>
@@ -2275,8 +2275,8 @@
         <translation>Impossible de démarrer le serveur HTTP. Voir le journal de débogage pour plus de détails.</translation>
     </message>
     <message>
-        <source>Litecoin Core</source>
-        <translation>Litecoin Core</translation>
+        <source>Mooncoin Core</source>
+        <translation>Mooncoin Core</translation>
     </message>
     <message>
         <source>Importing...</source>

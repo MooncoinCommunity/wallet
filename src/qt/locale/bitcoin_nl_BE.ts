@@ -66,12 +66,12 @@
         <translation>Adressen verkrijgen</translation>
     </message>
     <message>
-        <source>These are your Litecoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>Dit zijn uw Litecoin adressen om betalingen te verzenden. Controleer altijd het bedrag en het ontvang adres voordat u Litecoins verstuurd.</translation>
+        <source>These are your Mooncoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <translation>Dit zijn uw Mooncoin adressen om betalingen te verzenden. Controleer altijd het bedrag en het ontvang adres voordat u Mooncoins verstuurd.</translation>
     </message>
     <message>
-        <source>These are your Litecoin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
-        <translation>Dit zijn uw Litecoin adressen om betalingen te verzenden. Het is aangeraden om een nieuw ontvang adres te gebruiken voor iedere transactie.</translation>
+        <source>These are your Mooncoin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
+        <translation>Dit zijn uw Mooncoin adressen om betalingen te verzenden. Het is aangeraden om een nieuw ontvang adres te gebruiken voor iedere transactie.</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -125,7 +125,7 @@
     </message>
     <message>
         <source>Enter passphrase</source>
-        <translation>vul de wachtwoordzin in</translation>
+        <translation>vul de wachtwoordzin in</translation>
     </message>
     <message>
         <source>New passphrase</source>
@@ -146,8 +146,8 @@
 <context>
     <name>BitcoinGUI</name>
     <message>
-        <source>Litecoin</source>
-        <translation>Litecoin</translation>
+        <source>Mooncoin</source>
+        <translation>Mooncoin</translation>
     </message>
     </context>
 <context>
@@ -169,8 +169,8 @@
 <context>
     <name>Intro</name>
     <message>
-        <source>Litecoin</source>
-        <translation>Litecoin</translation>
+        <source>Mooncoin</source>
+        <translation>Mooncoin</translation>
     </message>
     </context>
 <context>
