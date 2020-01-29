@@ -46,6 +46,8 @@
 
 #include <boost/algorithm/string/replace.hpp>
 #include <boost/thread.hpp>
+#include <boost/random/mersenne_twister.hpp>
+#include <boost/random/uniform_int.hpp>
 
 #if defined(NDEBUG)
 # error "Litecoin cannot be compiled without assertions."
@@ -1151,16 +1153,119 @@ bool ReadRawBlockFromDisk(std::vector<uint8_t>& block, const CBlockIndex* pindex
     return ReadRawBlockFromDisk(block, block_pos, message_start);
 }
 
-CAmount GetBlockSubsidy(int nHeight, const Consensus::Params& consensusParams)
+namespace  {
+const long hextable[] =
 {
-    int halvings = nHeight / consensusParams.nSubsidyHalvingInterval;
-    // Force block reward to zero when right shift is undefined.
-    if (halvings >= 64)
-        return 0;
+    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,         // 10-19
+    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,         // 30-39
+    -1, -1, -1, -1, -1, -1, -1, -1,  0,  1,
+     2,  3,  4,  5,  6,  7,  8,  9, -1, -1,         // 50-59
+    -1, -1, -1, -1, -1, 10, 11, 12, 13, 14,
+    15, -1, -1, -1, -1, -1, -1, -1, -1, -1,         // 70-79
+    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+    -1, -1, -1, -1, -1, -1, -1, 10, 11, 12,         // 90-99
+    13, 14, 15, -1, -1, -1, -1, -1, -1, -1,
+    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,         // 110-109
+    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,         // 130-139
+    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,         // 150-159
+    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,         // 170-179
+    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,         // 190-199
+    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,         // 210-219
+    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,         // 230-239
+    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+    -1, -1, -1, -1, -1, -1
+};
 
-    CAmount nSubsidy = 50 * COIN;
-    // Subsidy is cut in half every 210,000 blocks which will occur approximately every 4 years.
-    nSubsidy >>= halvings;
+long hex2long(const char* hexString)
+{
+    long ret = 0;
+
+    while (*hexString && ret >= 0)
+    {
+        ret = (ret << 4) | hextable[(uint8_t)*hexString++];
+    }
+
+    return ret;
+}
+
+int static generateMTRandom(unsigned int s, int range)
+{
+    boost::mt19937 gen(s);
+    boost::uniform_int<> dist(1, range);
+    return dist(gen);
+}
+} // namespace
+
+
+CAmount GetBlockSubsidy(const int nHeight, const uint256 prevHash)
+{
+    CAmount nSubsidy = 29531 * COIN; // the lunar cycle is 29.53059 days, so we rounded it up
+
+    std::string cseed_str = prevHash.ToString().substr(7,7);
+    const char* cseed = cseed_str.c_str();
+    long seed = hex2long(cseed);
+
+    // cases for block 1 - 384400
+    if(nHeight <= 100000)
+    {
+        nSubsidy = (1 + generateMTRandom(seed, 1999999)) * COIN;
+    }
+    else if(nHeight > 193076 && nHeight < 203158)
+    {
+        nSubsidy = 2519841 * COIN; // for _roughly_ one week, the cost of the Apollo program will be paid back -- 25.4bn MOON!
+    }
+    else if(nHeight <= 203518)
+    {
+        nSubsidy = (1 + generateMTRandom(seed, 999999)) * COIN;
+    }
+    else if(nHeight <= 250000)
+    {
+        nSubsidy = (1 + generateMTRandom(seed, 599999)) * COIN;
+    }
+    else if(nHeight <= 300000)
+    {
+        nSubsidy = (1 + generateMTRandom(seed, 349999)) * COIN;
+    }
+    else if(nHeight <= 350000)
+    {
+        nSubsidy = (1 + generateMTRandom(seed, 174999)) * COIN;
+    }
+    else if(nHeight <= 375000)
+    {
+        nSubsidy = (1 + generateMTRandom(seed, 99999)) * COIN;
+    }
+    else if(nHeight <= 384400)
+    {
+        nSubsidy = (1 + generateMTRandom(seed, 49999)) * COIN;
+    }
+
+    // cases for block 384401 - 1099999
+    if (nHeight % 29531 == 0)
+    {
+        // a prize for ever lunar cycle
+        nSubsidy = nSubsidy * 2;
+    }
+
+    // cases for block 1100000+
+    if (nHeight > 1099999)
+    {
+        nSubsidy = floor( 19697202017 / (floor(nHeight/100000)*100000) ) * COIN;
+    }
+
+    // case for block 5432100000 onwards
+    if (nHeight > 5432099999)
+    {
+        nSubsidy = 0 * COIN;
+    }
+
     return nSubsidy;
 }
 
@@ -2026,7 +2131,12 @@ bool CChainState::ConnectBlock(const CBlock& block, CValidationState& state, CBl
     int64_t nTime3 = GetTimeMicros(); nTimeConnect += nTime3 - nTime2;
     LogPrint(BCLog::BENCH, "      - Connect %u transactions: %.2fms (%.3fms/tx, %.3fms/txin) [%.2fs (%.2fms/blk)]\n", (unsigned)block.vtx.size(), MILLI * (nTime3 - nTime2), MILLI * (nTime3 - nTime2) / block.vtx.size(), nInputs <= 1 ? 0 : MILLI * (nTime3 - nTime2) / (nInputs-1), nTimeConnect * MICRO, nTimeConnect * MILLI / nBlocksTotal);
 
-    CAmount blockReward = nFees + GetBlockSubsidy(pindex->nHeight, chainparams.GetConsensus());
+    uint256 prevHash;
+    if(pindex->pprev)
+    {
+        prevHash = pindex->pprev->GetBlockHash();
+    }
+    CAmount blockReward = nFees + GetBlockSubsidy(pindex->nHeight, prevHash);
     if (block.vtx[0]->GetValueOut() > blockReward)
         return state.DoS(100,
                          error("ConnectBlock(): coinbase pays too much (actual=%d vs limit=%d)",
