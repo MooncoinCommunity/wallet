@@ -244,13 +244,14 @@ public:
         bool sign,
         int& change_pos,
         CAmount& fee,
-        std::string& fail_reason) override
+        std::string& fail_reason,
+        const bool moonword) override
     {
         auto locked_chain = m_wallet->chain().lock();
         LOCK(m_wallet->cs_wallet);
         auto pending = MakeUnique<PendingWalletTxImpl>(*m_wallet);
         if (!m_wallet->CreateTransaction(*locked_chain, recipients, pending->m_tx, pending->m_key, fee, change_pos,
-                fail_reason, coin_control, sign)) {
+                fail_reason, coin_control, sign, moonword)) {
             return {};
         }
         return std::move(pending);
@@ -471,6 +472,133 @@ public:
     void remove() override
     {
         RemoveWallet(m_wallet);
+    }
+    std::map<uint256, CWalletTx> listMoonwordReceviedTransactions() override
+    {
+        std::map<uint256, CWalletTx> transactions;
+
+        {
+            auto locked_chain = m_wallet->chain().lock();
+            LOCK(m_wallet->cs_wallet);
+            for(std::map<uint256, CWalletTx>::iterator it = m_wallet->mapWallet.begin(); it != m_wallet->mapWallet.end(); ++it)
+            {
+                const CWalletTx &wtx = it->second;
+                CAmount nCredit = wtx.GetCredit(*locked_chain, ISMINE_ALL);
+                CAmount nDebit = wtx.GetDebit(ISMINE_ALL);
+                CAmount nNet = nCredit - nDebit;
+
+                if (wtx.GetDepthInMainChain(*locked_chain) > 0)
+                {
+                    // Incoming transaction
+                    if (nNet > 0)
+                    {
+                        for (const auto& txout : wtx.tx->vout)
+                        {
+                            isminetype mine = m_wallet->IsMine(txout);
+
+                            // TX should belong to wallet and be less than 1 coin
+                            if (mine && txout.nValue < 100000000)
+                            {
+                                transactions.emplace(it->first, it->second);
+                                break;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        isminetype fAllFromMe = ISMINE_SPENDABLE;
+                        for (const CTxIn& txin : wtx.tx->vin)
+                        {
+                            isminetype mine = m_wallet->IsMine(txin);
+                            if(fAllFromMe > mine)
+                                fAllFromMe = mine;
+                        }
+
+                        isminetype fAllToMe = ISMINE_SPENDABLE;
+                        for (const CTxOut& txout : wtx.tx->vout)
+                        {
+                            isminetype mine = m_wallet->IsMine(txout);
+                            if(fAllToMe > mine)
+                                fAllToMe = mine;
+                        }
+
+                        // Payment to self
+                        if (fAllFromMe && fAllToMe)
+                        {
+                            for (const auto& txout : wtx.tx->vout)
+                            {
+                                // TX should be less than 1 coin
+                                if (txout.nValue < 100000000)
+                                {
+                                    transactions.emplace(it->first, it->second);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        return transactions;
+    }
+
+    std::map<uint256, CWalletTx> listMoonwordSentTransactions() override
+    {
+        std::map<uint256, CWalletTx> transactions;
+
+        {
+            auto locked_chain = m_wallet->chain().lock();
+            LOCK(m_wallet->cs_wallet);
+            for(std::map<uint256, CWalletTx>::iterator it = m_wallet->mapWallet.begin(); it != m_wallet->mapWallet.end(); ++it)
+            {
+                const CWalletTx &wtx = it->second;
+                CAmount nCredit = wtx.GetCredit(*locked_chain, ISMINE_ALL);
+                CAmount nDebit = wtx.GetDebit(ISMINE_ALL);
+                CAmount nNet = nCredit - nDebit;
+
+                if (wtx.GetDepthInMainChain(*locked_chain) > 0)
+                {
+                    // Incoming transaction
+                    if (nNet < 0)
+                    {
+                        isminetype fAllFromMe = ISMINE_SPENDABLE;
+                        for (const CTxIn& txin : wtx.tx->vin)
+                        {
+                            isminetype mine = m_wallet->IsMine(txin);
+                            if(fAllFromMe > mine)
+                                fAllFromMe = mine;
+                        }
+
+                        // Payment from self
+                        if (fAllFromMe)
+                        {
+                            for (const auto& txout : wtx.tx->vout)
+                            {
+                                // TX should be less than 1 coin
+                                if (txout.nValue < 100000000)
+                                {
+                                    transactions.emplace(it->first, it->second);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        return transactions;
+    }
+
+    bool isChange(const CTxOut& txout) override
+    {
+        return m_wallet->IsChange(txout);
+    }
+
+    bool isMine(CTxDestination& address) override
+    {
+        return m_wallet->IsMine(address);
     }
     std::unique_ptr<Handler> handleUnload(UnloadFn fn) override
     {

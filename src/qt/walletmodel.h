@@ -35,12 +35,14 @@ class PlatformStyle;
 class RecentRequestsTableModel;
 class TransactionTableModel;
 class WalletModelTransaction;
+class MoonWordDialog;
 
 class CCoinControl;
 class CKeyID;
 class COutPoint;
 class COutput;
 class CPubKey;
+class CWalletTx;
 class uint256;
 
 namespace interfaces {
@@ -155,6 +157,7 @@ public:
     AddressTableModel *getAddressTableModel();
     TransactionTableModel *getTransactionTableModel();
     RecentRequestsTableModel *getRecentRequestsTableModel();
+    MoonWordDialog *getMoonWordDialog();
 
     EncryptionStatus getEncryptionStatus() const;
 
@@ -174,7 +177,7 @@ public:
     };
 
     // prepare transaction for getting txfee before sending coins
-    SendCoinsReturn prepareTransaction(WalletModelTransaction &transaction, const CCoinControl& coinControl);
+    SendCoinsReturn prepareTransaction(WalletModelTransaction &transaction, const CCoinControl& coinControl, const bool moonword = false);
 
     // Send coins to a list of recipients
     SendCoinsReturn sendCoins(WalletModelTransaction &transaction);
@@ -246,6 +249,7 @@ private:
     AddressTableModel *addressTableModel;
     TransactionTableModel *transactionTableModel;
     RecentRequestsTableModel *recentRequestsTableModel;
+    MoonWordDialog *moonWordPage;
 
     // Cache some values to be able to detect changes
     interfaces::WalletBalances m_cached_balances;

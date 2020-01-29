@@ -74,7 +74,7 @@ static UniValue getrawtransaction(const JSONRPCRequest& request)
                 "\nBy default this function only works for mempool transactions. When called with a blockhash\n"
                 "argument, getrawtransaction will return the transaction if the specified block is available and\n"
                 "the transaction is found in that block. When called without a blockhash argument, getrawtransaction\n"
-                "will return the transaction if it is in the mempool, or if -txindex is enabled and the transaction\n"
+                "will return the transaction if it is in the mempool, or if the transaction\n"
                 "is in a block in the blockchain.\n"
 
                 "\nHint: Use gettransaction for wallet transactions.\n"
@@ -219,8 +219,7 @@ static UniValue gettxoutproof(const JSONRPCRequest& request)
                 "\nReturns a hex-encoded proof that \"txid\" was included in a block.\n"
                 "\nNOTE: By default this function only works sometimes. This is when there is an\n"
                 "unspent output in the utxo for this transaction. To make it always work,\n"
-                "you need to maintain a transaction index, using the -txindex command line option or\n"
-                "specify the block in which the transaction is included manually (by blockhash).\n",
+                "you need to specify the block in which the transaction is included manually (by blockhash).\n",
                 {
                     {"txids", RPCArg::Type::ARR, RPCArg::Optional::NO, "A json array of txids to filter",
                         {

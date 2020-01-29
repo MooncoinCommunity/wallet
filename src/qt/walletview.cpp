@@ -14,6 +14,7 @@
 #include <qt/platformstyle.h>
 #include <qt/receivecoinsdialog.h>
 #include <qt/sendcoinsdialog.h>
+#include <qt/moonworddialog.h>
 #include <qt/signverifymessagedialog.h>
 #include <qt/transactiontablemodel.h>
 #include <qt/transactionview.h>
@@ -134,6 +135,8 @@ void WalletView::setWalletModel(WalletModel *_walletModel)
 
     if (_walletModel)
     {
+        addWidget(_walletModel->getMoonWordDialog());
+
         // Receive and pass through messages from wallet model
         connect(_walletModel, &WalletModel::message, this, &WalletView::message);
 
@@ -196,6 +199,14 @@ void WalletView::gotoSendCoinsPage(QString addr)
 
     if (!addr.isEmpty())
         sendCoinsPage->setAddress(addr);
+}
+
+void WalletView::gotoMoonWordPage()
+{
+    if (walletModel)
+    {
+        setCurrentWidget(walletModel->getMoonWordDialog());
+    }
 }
 
 void WalletView::gotoSignMessageTab(QString addr)

@@ -1387,6 +1387,11 @@ bool CWallet::IsMine(const CTransaction& tx) const
     return false;
 }
 
+bool CWallet::IsMine(const CTxDestination& address) const
+{
+    return ::IsMine(*this, address) == ISMINE_SPENDABLE;
+}
+
 bool CWallet::IsFromMe(const CTransaction& tx) const
 {
     return (GetDebit(tx, ISMINE_ALL) > 0);
@@ -2782,7 +2787,7 @@ OutputType CWallet::TransactionChangeType(OutputType change_type, const std::vec
 }
 
 bool CWallet::CreateTransaction(interfaces::Chain::Lock& locked_chain, const std::vector<CRecipient>& vecSend, CTransactionRef& tx, CReserveKey& reservekey, CAmount& nFeeRet,
-                         int& nChangePosInOut, std::string& strFailReason, const CCoinControl& coin_control, bool sign)
+                         int& nChangePosInOut, std::string& strFailReason, const CCoinControl& coin_control, bool sign, const bool moonword)
 {
     CAmount nValue = 0;
     int nChangePosRequest = nChangePosInOut;
@@ -2913,7 +2918,12 @@ bool CWallet::CreateTransaction(interfaces::Chain::Lock& locked_chain, const std
                                 strFailReason = _("The transaction amount is too small to send after the fee has been deducted");
                         }
                         else
-                            strFailReason = _("Transaction amount too small");
+                        {
+                            if (!moonword)
+                                strFailReason = _("Transaction amount too small");
+                            else
+                                strFailReason = _("One or more outputs in this TX are below the dust threshold and will be rejected by miners");
+                        }
                         return false;
                     }
                     txNew.vout.push_back(txout);

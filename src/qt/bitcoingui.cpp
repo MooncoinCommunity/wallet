@@ -273,6 +273,13 @@ void BitcoinGUI::createActions()
     historyAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_4));
     tabGroup->addAction(historyAction);
 
+    moonWordAction = new QAction(platformStyle->SingleColorIcon(":/icons/send"), tr("&MoonWord"), this);
+    moonWordAction->setStatusTip(tr("Send coins with MoonWord"));
+    moonWordAction->setToolTip(moonWordAction->statusTip());
+    moonWordAction->setCheckable(true);
+    moonWordAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_5));
+    tabGroup->addAction(moonWordAction);
+
 #ifdef ENABLE_WALLET
     // These showNormalIfMinimized are needed because Send Coins and Receive Coins
     // can be triggered from the tray menu, and need to show the GUI to be useful.
@@ -288,6 +295,8 @@ void BitcoinGUI::createActions()
     connect(receiveCoinsMenuAction, &QAction::triggered, this, &BitcoinGUI::gotoReceiveCoinsPage);
     connect(historyAction, &QAction::triggered, [this]{ showNormalIfMinimized(); });
     connect(historyAction, &QAction::triggered, this, &BitcoinGUI::gotoHistoryPage);
+    connect(moonWordAction, &QAction::triggered, [this]{ showNormalIfMinimized(); });
+    connect(moonWordAction, &QAction::triggered, [this]{ gotoMoonWordPage(); });
 #endif // ENABLE_WALLET
 
     quitAction = new QAction(platformStyle->TextColorIcon(":/icons/quit"), tr("E&xit"), this);
@@ -536,6 +545,7 @@ void BitcoinGUI::createToolBars()
         toolbar->addAction(sendCoinsAction);
         toolbar->addAction(receiveCoinsAction);
         toolbar->addAction(historyAction);
+        toolbar->addAction(moonWordAction);
         overviewAction->setChecked(true);
 
 #ifdef ENABLE_WALLET
@@ -720,6 +730,7 @@ void BitcoinGUI::setWalletActionsEnabled(bool enabled)
     usedReceivingAddressesAction->setEnabled(enabled);
     openAction->setEnabled(enabled);
     m_close_wallet_action->setEnabled(enabled);
+    moonWordAction->setEnabled(enabled);
 }
 
 void BitcoinGUI::createTrayIcon()
@@ -853,6 +864,11 @@ void BitcoinGUI::gotoSendCoinsPage(QString addr)
 {
     sendCoinsAction->setChecked(true);
     if (walletFrame) walletFrame->gotoSendCoinsPage(addr);
+}
+
+void BitcoinGUI::gotoMoonWordPage()
+{
+    if (walletFrame) walletFrame->gotoMoonWordPage();
 }
 
 void BitcoinGUI::gotoSignMessageTab(QString addr)
