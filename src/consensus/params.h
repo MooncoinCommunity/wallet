@@ -75,6 +75,7 @@ struct Params {
     int nPoWForkOne;
     int nPoWForkTwo;
     int nPoWForkThree;
+    int nRestoreValidation;
     int64_t DifficultyAdjustmentInterval() const { return nPowTargetTimespan / nPowTargetSpacing; }
     uint256 nMinimumChainWork;
     uint256 defaultAssumeValid;

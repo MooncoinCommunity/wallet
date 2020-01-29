@@ -156,7 +156,7 @@ int64_t GetTransactionSigOpCost(const CTransaction& tx, const CCoinsViewCache& i
     return nSigOps;
 }
 
-bool CheckTransaction(const CTransaction& tx, CValidationState &state, bool fCheckDuplicateInputs)
+bool CheckTransaction(const CTransaction& tx, CValidationState &state, bool fCheckDuplicateInputs, bool fSkipCoinbaseLengthCheck)
 {
     // Basic checks that don't depend on any context
     if (tx.vin.empty())
@@ -192,8 +192,12 @@ bool CheckTransaction(const CTransaction& tx, CValidationState &state, bool fChe
 
     if (tx.IsCoinBase())
     {
-        if (tx.vin[0].scriptSig.size() < 2 || tx.vin[0].scriptSig.size() > 100)
-            return state.DoS(100, false, REJECT_INVALID, "bad-cb-length");
+        // 0.13 skipped checking coinbase script length, probably due to the genesis coinbase being too long,
+        // rather than just skip genesis the following check was removed. This check is restore at nRestoreValidation.
+        // It cannot be restored before as a pool started creating coinbase scripts that were too long.
+        if (!fSkipCoinbaseLengthCheck)
+            if (tx.vin[0].scriptSig.size() < 2 || tx.vin[0].scriptSig.size() > 100)
+                return state.DoS(100, false, REJECT_INVALID, "bad-cb-length");
     }
     else
     {

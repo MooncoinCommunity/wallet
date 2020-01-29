@@ -13,6 +13,7 @@
 #include <versionbitsinfo.h>
 
 #include <assert.h>
+#include <limits>
 
 #include <boost/algorithm/string/classification.hpp>
 #include <boost/algorithm/string/split.hpp>
@@ -59,8 +60,8 @@ public:
         strNetworkID = "main";
         consensus.nSubsidyHalvingInterval = 840000;
         consensus.BIP16Height = 0;
-        consensus.BIP34Height = 0;
-        consensus.BIP34Hash = uint256();
+        consensus.BIP34Height = 55179;
+        consensus.BIP34Hash = uint256S("1ed4f754470427afff76dfa25ec815b468a574f9b6ffa5b0bdfb7187ca425479");
         consensus.BIP65Height = 1188350;
         consensus.BIP66Height = 1184549;
         consensus.powLimit = uint256S("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"); 
@@ -69,6 +70,7 @@ public:
         consensus.nPoWForkOne = 26850;
         consensus.nPoWForkTwo = 1100000;
         consensus.nPoWForkThree = 1250000;
+        consensus.nRestoreValidation = std::numeric_limits<int>::max();
         consensus.fPowAllowMinDifficultyBlocks = false;
         consensus.fPowNoRetargeting = false;
         consensus.nRuleChangeActivationThreshold = 6048; // 75% of 8064
@@ -180,6 +182,7 @@ public:
         consensus.nPoWForkOne = 0;
         consensus.nPoWForkTwo = 0;
         consensus.nPoWForkThree = 0;
+        consensus.nRestoreValidation = 0;
         consensus.fPowAllowMinDifficultyBlocks = true;
         consensus.fPowNoRetargeting = false;
         consensus.nRuleChangeActivationThreshold = 1512; // 75% for testchains
@@ -272,6 +275,7 @@ public:
         consensus.nPoWForkOne = 0;
         consensus.nPoWForkTwo = 0;
         consensus.nPoWForkThree = 0;
+        consensus.nRestoreValidation = 0;
         consensus.fPowAllowMinDifficultyBlocks = true;
         consensus.fPowNoRetargeting = true;
         consensus.nRuleChangeActivationThreshold = 108; // 75% for testchains

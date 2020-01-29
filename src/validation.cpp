@@ -859,7 +859,7 @@ static bool AcceptToMemoryPoolWorker(const CChainParams& chainparams, CTxMemPool
         *pfMissingInputs = false;
     }
 
-    if (!CheckTransaction(tx, state))
+    if (!CheckTransaction(tx, state, true, chainActive.Height() < chainparams.GetConsensus().nRestoreValidation))
         return false; // state filled in by CheckTransaction
 
     // Coinbase is only valid in a block, not as a loose transaction
@@ -3444,7 +3444,7 @@ bool CheckBlock(const CBlock& block, CValidationState& state, const Consensus::P
 
     // Check transactions
     for (const auto& tx : block.vtx)
-        if (!CheckTransaction(*tx, state, true))
+        if (!CheckTransaction(*tx, state, true, chainActive.Height() < consensusParams.nRestoreValidation))
             return state.Invalid(false, state.GetRejectCode(), state.GetRejectReason(),
                                  strprintf("Transaction check failed (tx hash %s) %s", tx->GetHash().ToString(), state.GetDebugMessage()));
 
@@ -3561,20 +3561,26 @@ static bool ContextualCheckBlockHeader(const CBlockHeader& block, CValidationSta
 {
     assert(pindexPrev != nullptr);
     const int nHeight = pindexPrev->nHeight + 1;
-
-    // Check proof of work
     const Consensus::Params& consensusParams = params.GetConsensus();
-    if(nHeight >= consensusParams.nPoWForkOne && nHeight < consensusParams.nPoWForkTwo){
-        unsigned int nBitsNext = GetNextWorkRequired(pindexPrev, &block, consensusParams);
-        double n1 = ConvertBitsToDouble(block.nBits);
-        double n2 = ConvertBitsToDouble(nBitsNext);
-        if (std::abs(n1-n2) > n1*0.5){
-            return state.DoS(100, error("%s : incorrect proof of work (DGW pre-fork) - %f %f %f at %d", __func__, abs(n1-n2), n1, n2, nHeight),
+
+    // 0.13 client skipped checking work required from next block, restore difficulty check at
+    // set height which could result in a fork between 0.13 and 0.18, after verify and restore
+    // historical validation of entire chain. Skipping GetNextWorkRequired would allow attackers
+    // to set the difficulty arbitarily.
+    if (nHeight >= consensusParams.nRestoreValidation) {
+        // Check proof of work
+        if(nHeight >= consensusParams.nPoWForkOne && nHeight < consensusParams.nPoWForkTwo){
+            unsigned int nBitsNext = GetNextWorkRequired(pindexPrev, &block, consensusParams);
+            double n1 = ConvertBitsToDouble(block.nBits);
+            double n2 = ConvertBitsToDouble(nBitsNext);
+            if (std::abs(n1-n2) > n1*0.5){
+                return state.DoS(100, error("%s : incorrect proof of work (DGW pre-fork) - %f %f %f at %d", __func__, abs(n1-n2), n1, n2, nHeight),
+                                                    REJECT_INVALID, "bad-diffbits");
+            }
+        } else if (block.nBits != GetNextWorkRequired(pindexPrev, &block, consensusParams)){
+            return state.DoS(100, error("%s : incorrect proof of work at %d", __func__, nHeight),
                                                 REJECT_INVALID, "bad-diffbits");
         }
-    } else if (block.nBits != GetNextWorkRequired(pindexPrev, &block, consensusParams)){
-        return state.DoS(100, error("%s : incorrect proof of work at %d", __func__, nHeight),
-                                            REJECT_INVALID, "bad-diffbits");
     }
 
     // Check against checkpoints
@@ -3595,17 +3601,22 @@ static bool ContextualCheckBlockHeader(const CBlockHeader& block, CValidationSta
     if (block.GetBlockTime() > nAdjustedTime + MAX_FUTURE_BLOCK_TIME)
         return state.Invalid(false, REJECT_INVALID, "time-too-new", "block timestamp too far in the future");
 
-    // Reject outdated version blocks when 95% (75% on testnet) of the network has upgraded:
-    // check for version 2, 3 and 4 upgrades
-    if((block.nVersion < 2 && nHeight >= consensusParams.BIP34Height) ||
-       (block.nVersion < 3 && nHeight >= consensusParams.BIP66Height) ||
-       (block.nVersion < 4 && nHeight >= consensusParams.BIP65Height))
-            return state.Invalid(false, REJECT_OBSOLETE, strprintf("bad-version(0x%08x)", block.nVersion),
-                                 strprintf("rejected nVersion=0x%08x block", block.nVersion));
+    // 0.13 client skipped checking block version which would normally help secure soft forks,
+    // restore block version checks at set height which could result in a fork between 0.13 and 0.18,
+    // after verify and restore historical block version checks of entire chain.
+    if (nHeight >= consensusParams.nRestoreValidation) {
+        // Reject outdated version blocks when 95% (75% on testnet) of the network has upgraded:
+        // check for version 2, 3 and 4 upgrades
+        if((block.nVersion < 2 && nHeight >= consensusParams.BIP34Height) ||
+           (block.nVersion < 3 && nHeight >= consensusParams.BIP66Height) ||
+           (block.nVersion < 4 && nHeight >= consensusParams.BIP65Height))
+                return state.Invalid(false, REJECT_OBSOLETE, strprintf("bad-version(0x%08x)", block.nVersion),
+                                     strprintf("rejected nVersion=0x%08x block", block.nVersion));
 
-    if (block.nVersion < VERSIONBITS_TOP_BITS && IsWitnessEnabled(pindexPrev, consensusParams))
-        return state.Invalid(false, REJECT_OBSOLETE, strprintf("bad-version(0x%08x)", block.nVersion),
-                                 strprintf("rejected nVersion=0x%08x block", block.nVersion));
+        if (block.nVersion < VERSIONBITS_TOP_BITS && IsWitnessEnabled(pindexPrev, consensusParams))
+            return state.Invalid(false, REJECT_OBSOLETE, strprintf("bad-version(0x%08x)", block.nVersion),
+                                     strprintf("rejected nVersion=0x%08x block", block.nVersion));
+    }
 
     return true;
 }
@@ -3638,13 +3649,17 @@ static bool ContextualCheckBlock(const CBlock& block, CValidationState& state, c
         }
     }
 
-    // Enforce rule that the coinbase starts with serialized block height
-    if (nHeight >= consensusParams.BIP34Height)
-    {
-        CScript expect = CScript() << nHeight;
-        if (block.vtx[0]->vin[0].scriptSig.size() < expect.size() ||
-            !std::equal(expect.begin(), expect.end(), block.vtx[0]->vin[0].scriptSig.begin())) {
-            return state.DoS(100, false, REJECT_INVALID, "bad-cb-height", false, "block height mismatch in coinbase");
+    // 0.13 client skipped BIP34 check entirely, this is where the coinbase is verified to contain a block height.
+    // Validation will be restored at nRestoreValidation height. This may create a fork between 0.13 and 0.18 clients.
+    if (pindexPrev->nHeight + 1 >= consensusParams.nRestoreValidation) {
+        // Enforce rule that the coinbase starts with serialized block height
+        if (nHeight >= consensusParams.BIP34Height)
+        {
+            CScript expect = CScript() << nHeight;
+            if (block.vtx[0]->vin[0].scriptSig.size() < expect.size() ||
+                !std::equal(expect.begin(), expect.end(), block.vtx[0]->vin[0].scriptSig.begin())) {
+                return state.DoS(100, false, REJECT_INVALID, "bad-cb-height", false, "block height mismatch in coinbase");
+            }
         }
     }
 
@@ -3727,8 +3742,14 @@ bool CChainState::AcceptBlockHeader(const CBlockHeader& block, CValidationState&
         pindexPrev = (*mi).second;
         if (pindexPrev->nStatus & BLOCK_FAILED_MASK)
             return state.DoS(100, error("%s: prev block invalid", __func__), REJECT_INVALID, "bad-prevblk");
-        if (!ContextualCheckBlockHeader(block, state, chainparams, pindexPrev, GetAdjustedTime()))
-            return error("%s: Consensus::ContextualCheckBlockHeader: %s, %s", __func__, hash.ToString(), FormatStateMessage(state));
+
+        // 0.13 client skipped ContextualCheckBlockHeader entirely in AcceptBlock, this is where block difficulty, time warp,
+        // and block version for the next block header are validated. Validation will be restored at nRestoreValidation height.
+        // This may create a fork between 0.13 and 0.18. Historical validation of blocks can be restored in a future 0.18 release.
+        if (pindexPrev->nHeight + 1 >= chainparams.GetConsensus().nRestoreValidation) {
+            if (!ContextualCheckBlockHeader(block, state, chainparams, pindexPrev, GetAdjustedTime()))
+                return error("%s: Consensus::ContextualCheckBlockHeader: %s, %s", __func__, hash.ToString(), FormatStateMessage(state));
+        }
 
         /* Determine if this block descends from any block which has been found
          * invalid (m_failed_blocks), then mark pindexPrev and any blocks between
