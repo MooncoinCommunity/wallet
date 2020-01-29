@@ -1,14 +1,14 @@
 *.tar.gz
 
 *.exe
-src/litecoin
-src/litecoind
-src/litecoin-cli
-src/litecoin-tx
-src/litecoin-wallet
-src/test/test_litecoin
-src/test/test_litecoin_fuzzy
-src/qt/test/test_litecoin-qt
+src/mooncoin
+src/mooncoind
+src/mooncoin-cli
+src/mooncoin-tx
+src/mooncoin-wallet
+src/test/test_mooncoin
+src/test/test_mooncoin_fuzzy
+src/qt/test/test_mooncoin-qt
 
 # autoreconf
 Makefile.in
@@ -83,13 +83,13 @@ src/qt/bitcoin-qt.includes
 # Compilation and Qt preprocessor part
 *.qm
 Makefile
-litecoin-qt
-litecoin-Qt.app
+mooncoin-qt
+Mooncoin-Qt.app
 background.tiff*
 
 # Unit-tests
 Makefile.test
-litecoin-qt_test
+mooncoin-qt_test
 
 # Resources cpp
 qrc_*.cpp
@@ -101,7 +101,7 @@ build
 *.gcno
 *.gcda
 /*.info
-test_litecoin.coverage/
+test_mooncoin.coverage/
 total.coverage/
 coverage_percent.txt
 
