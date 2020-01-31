@@ -38,7 +38,7 @@
   <true/>
 
   <key>CFBundleIdentifier</key>
-  <string>eco.mooncoin.Mooncoin-Qt</string>
+  <string>com.mooncoin.Mooncoin-Qt</string>
 
   <key>CFBundleURLTypes</key>
   <array>
@@ -46,7 +46,7 @@
       <key>CFBundleTypeRole</key>
       <string>Editor</string>
       <key>CFBundleURLName</key>
-      <string>eco.mooncoin.MooncoinPayment</string>
+      <string>com.mooncoin.MooncoinPayment</string>
       <key>CFBundleURLSchemes</key>
       <array>
         <string>mooncoin</string>
@@ -58,7 +58,7 @@
   <array>
     <dict>
       <key>UTTypeIdentifier</key>
-      <string>eco.mooncoin.paymentrequest</string>
+      <string>com.mooncoin.paymentrequest</string>
       <key>UTTypeDescription</key>
       <string>Mooncoin payment request</string>
       <key>UTTypeConformsTo</key>
@@ -84,7 +84,7 @@
       <string>Editor</string>
       <key>LSItemContentTypes</key>
       <array>
-        <string>eco.mooncoin.paymentrequest</string>
+        <string>com.mooncoin.paymentrequest</string>
       </array>
       <key>LSHandlerRank</key>
       <string>Owner</string>

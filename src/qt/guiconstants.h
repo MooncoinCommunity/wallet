@@ -47,7 +47,7 @@ static const int MAX_URI_LENGTH = 255;
 #define SPINNER_FRAMES 36
 
 #define QAPP_ORG_NAME "Mooncoin"
-#define QAPP_ORG_DOMAIN "mooncoin.eco"
+#define QAPP_ORG_DOMAIN "mooncoin.com"
 #define QAPP_APP_NAME_DEFAULT "Mooncoin-Qt"
 #define QAPP_APP_NAME_TESTNET "Mooncoin-Qt-testnet"
 #define QAPP_APP_NAME_REGTEST "Mooncoin-Qt-regtest"

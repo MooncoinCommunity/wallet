@@ -13,7 +13,7 @@
 - (NSString *)__bundleIdentifier
 {
     if (self == [NSBundle mainBundle]) {
-        return @"eco.mooncoin.Mooncoin-Qt";
+        return @"com.mooncoin.Mooncoin-Qt";
     } else {
         return [self __bundleIdentifier];
     }
