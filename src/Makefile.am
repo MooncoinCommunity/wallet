@@ -101,6 +101,7 @@ endif
 # bitcoin core #
 BITCOIN_CORE_H = \
   addrdb.h \
+  addressindex.h \
   addrman.h \
   attributes.h \
   banman.h \

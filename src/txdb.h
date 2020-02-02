@@ -6,6 +6,7 @@
 #ifndef BITCOIN_TXDB_H
 #define BITCOIN_TXDB_H
 
+#include <addressindex.h>
 #include <coins.h>
 #include <dbwrapper.h>
 #include <chain.h>
@@ -96,6 +97,16 @@ public:
     bool WriteFlag(const std::string &name, bool fValue);
     bool ReadFlag(const std::string &name, bool &fValue);
     bool LoadBlockIndexGuts(const Consensus::Params& consensusParams, std::function<CBlockIndex*(const uint256&)> insertBlockIndex);
+
+    // Additional address indexing
+    bool WriteAddressIndex(const std::vector<std::pair<CAddressIndexKey, CAmount> > &vect);
+    bool EraseAddressIndex(const std::vector<std::pair<CAddressIndexKey, CAmount> > &vect);
+    bool ReadAddressIndex(uint256 addressHash, int type,
+                        std::vector<std::pair<CAddressIndexKey, CAmount> > &addressIndex,
+                        int start = 0, int end = 0);
+    bool UpdateAddressUnspentIndex(const std::vector<std::pair<CAddressUnspentKey, CAddressUnspentValue > >&vect);
+    bool ReadAddressUnspentIndex(uint256 addressHash, int type,
+                                std::vector<std::pair<CAddressUnspentKey, CAddressUnspentValue> > &vect);
 };
 
 #endif // BITCOIN_TXDB_H

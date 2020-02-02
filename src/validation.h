@@ -32,6 +32,9 @@
 
 #include <atomic>
 
+class CAddressIndexKey;
+class CAddressUnspentKey;
+class CAddressUnspentValue;
 class CBlockIndex;
 class CBlockTreeDB;
 class CChainParams;
@@ -389,6 +392,11 @@ public:
 /** Initializes the script-execution cache */
 void InitScriptExecutionCache();
 
+bool GetAddressIndex(uint256 addressHash, int type,
+                     std::vector<std::pair<CAddressIndexKey, CAmount>> &addressIndex,
+                     int start = 0, int end = 0);
+bool GetAddressUnspent(uint256 addressHash, int type,
+                       std::vector<std::pair<CAddressUnspentKey, CAddressUnspentValue>> &unspentOutputs);
 
 /** Functions for disk access for blocks */
 bool ReadBlockFromDisk(CBlock& block, const CDiskBlockPos& pos, const Consensus::Params& consensusParams);

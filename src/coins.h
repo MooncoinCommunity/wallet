@@ -293,6 +293,8 @@ public:
     //! Check whether all prevouts of the transaction are present in the UTXO set represented by this view
     bool HaveInputs(const CTransaction& tx) const;
 
+    const CTxOut &GetOutputFor(const CTxIn& input) const;
+
 private:
     CCoinsMap::iterator FetchCoin(const COutPoint &outpoint) const;
 };

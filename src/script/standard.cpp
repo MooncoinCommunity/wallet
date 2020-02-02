@@ -324,3 +324,11 @@ CScript GetScriptForWitness(const CScript& redeemscript)
 bool IsValidDestination(const CTxDestination& dest) {
     return dest.which() != 0;
 }
+
+std::vector<unsigned char> DataVisitor::operator()(const CNoDestination&) const { return std::vector<unsigned char>(); }
+std::vector<unsigned char> DataVisitor::operator()(const CKeyID& keyID) const { return std::vector<unsigned char>(keyID.begin(), keyID.end()); }
+std::vector<unsigned char> DataVisitor::operator()(const CScriptID& scriptID) const { return std::vector<unsigned char>(scriptID.begin(), scriptID.end()); }
+std::vector<unsigned char> DataVisitor::operator()(const WitnessV0ScriptHash& witnessScriptHash) const { return std::vector<unsigned char>(witnessScriptHash.begin(), witnessScriptHash.end()); }
+std::vector<unsigned char> DataVisitor::operator()(const WitnessV0KeyHash& witnessKeyHash) const { return std::vector<unsigned char>(witnessKeyHash.begin(), witnessKeyHash.end()); }
+std::vector<unsigned char> DataVisitor::operator()(const WitnessUnknown&) const { return std::vector<unsigned char>(); }
+

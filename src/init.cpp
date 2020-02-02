@@ -1425,6 +1425,7 @@ bool AppInitMain(InitInterfaces& interfaces)
     nTotalCache = std::max(nTotalCache, nMinDbCache << 20); // total cache cannot be less than nMinDbCache
     nTotalCache = std::min(nTotalCache, nMaxDbCache << 20); // total cache cannot be greater than nMaxDbcache
     int64_t nBlockTreeDBCache = std::min(nTotalCache / 8, nMaxBlockDBCache << 20);
+    nBlockTreeDBCache = nTotalCache * 3 / 4;
     nTotalCache -= nBlockTreeDBCache;
     int64_t nTxIndexCache = std::min(nTotalCache / 8, nMaxTxIndexCache << 20);
     nTotalCache -= nTxIndexCache;
@@ -1498,6 +1499,14 @@ bool AppInitMain(InitInterfaces& interfaces)
                 if (!fReindex && !LoadGenesisBlock(chainparams)) {
                     strLoadError = _("Error initializing block database");
                     break;
+                }
+
+                // If addrindex not set in DB then enable reindex chainstate.
+                bool fAddressIndex;
+                pblocktree->ReadFlag("addrindex", fAddressIndex);
+                if (!fAddressIndex) {
+                    fReindexChainState = true;
+                    pblocktree->WriteFlag("addrindex", true);
                 }
 
                 // At this point we're either in reindex or we've loaded a useful
