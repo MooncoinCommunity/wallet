@@ -947,8 +947,6 @@ void MoonWordDialog::populateFromAddresses()
     fromOutputs.clear();
     fromAddressesMap.clear();
 
-    model->wallet().listCoins();
-
     // Holds whether the address is seen and what position it will have in the fromAddressMap and drop down
     std::map<QString, int> mapPosition;
     int position = 1;
