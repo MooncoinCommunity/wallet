@@ -1,7 +1,9 @@
 ## Mooncoin Core 0.18.1-L
 
 
-* Hardfork to new codebase occurs at block 1,250,000, however Mooncoin 0.10 and 0.13 wallets will be compatible until this point.
+* Hardfork to new codebase occurs at block 1,798,000, however Mooncoin 0.10 and 0.13 wallets will be compatible until this point.
+
+* This new version comes with MLike and MoonWord.
 
 * PoW algorithm is Scrypt, not BalloonHash. Pools and lightning network (in the future) support Scrypt, Balloon is exotic.
 
@@ -90,5 +92,5 @@ _____
 
 ### RPC PORT 44663 / P2P PORT 44664
 
-#### Mooncoin started as an early Dogecoin fork (0.6), was upgraded over time to the Litecoin codebase (0.8), since progressing through to a much more modern Litecoin 0.10 codebase - and finally to current platform of Litecoin 0.13.9 with segwit. Built with tomorrow in mind.
+#### Mooncoin started as an early Dogecoin fork (0.6), was upgraded over time to the Litecoin codebase (0.8), since progressing through to a much more modern Litecoin 0.10 codebase - and finally to current platform of Litecoin 0.18.1 with segwit. Built with tomorrow in mind.
 
