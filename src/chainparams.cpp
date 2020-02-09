@@ -160,6 +160,8 @@ public:
 
         /* disable fallback fee on mainnet */
         m_fallback_fee_enabled = true;
+
+        m_mlikes_prefix = "MLikes";
     }
 };
 
@@ -253,6 +255,8 @@ public:
 
         /* enable fallback fee on testnet */
         m_fallback_fee_enabled = true;
+
+        m_mlikes_prefix = "QLikes";
     }
 };
 
@@ -342,6 +346,8 @@ public:
 
         /* enable fallback fee on regtest */
         m_fallback_fee_enabled = true;
+
+        m_mlikes_prefix = "QLikes";
     }
 
     /**

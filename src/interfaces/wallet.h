@@ -139,7 +139,8 @@ public:
         int& change_pos,
         CAmount& fee,
         std::string& fail_reason,
-        const bool moonword) = 0;
+        const bool moonword,
+        const bool mlike) = 0;
 
     //! Return whether transaction can be abandoned.
     virtual bool transactionCanBeAbandoned(const uint256& txid) = 0;

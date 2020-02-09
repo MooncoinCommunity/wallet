@@ -428,8 +428,9 @@ SendCoinsEntry *SendCoinsDialog::addEntry()
     entry->setModel(model);
     ui->entries->addWidget(entry);
     connect(entry, &SendCoinsEntry::removeEntry, this, &SendCoinsDialog::removeEntry);
+    connect(entry, &SendCoinsEntry::toAddressChanged, this, &SendCoinsDialog::setSendButtonText);
     connect(entry, &SendCoinsEntry::useAvailableBalance, this, &SendCoinsDialog::useAvailableBalance);
-    connect(entry, &SendCoinsEntry::payAmountChanged, this, &SendCoinsDialog::coinControlUpdateLabels);
+    connect(entry, &SendCoinsEntry::payAmountChanged, this, &SendCoinsDialog::coinControlUpdateLabels); 
     connect(entry, &SendCoinsEntry::subtractFeeFromAmountChanged, this, &SendCoinsDialog::coinControlUpdateLabels);
 
     // Focus the field, so that entry can start immediately
@@ -462,6 +463,22 @@ void SendCoinsDialog::removeEntry(SendCoinsEntry* entry)
     entry->deleteLater();
 
     updateTabsAndLabels();
+}
+
+void SendCoinsDialog::setSendButtonText(const QString &address)
+{
+    if (sBackupSendText.isEmpty())
+    {
+        sBackupSendText = ui->sendButton->text();
+    }
+    if (address.toStdString().rfind(Params().MLikesPrefix(), 0) != std::string::npos)
+    {
+        ui->sendButton->setText("Like");
+    }
+    else if (ui->sendButton->text() != sBackupSendText)
+    {
+        ui->sendButton->setText(sBackupSendText);
+    }
 }
 
 QWidget *SendCoinsDialog::setupTabChain(QWidget *prev)
@@ -587,6 +604,15 @@ void SendCoinsDialog::processSendCoinsReturn(const WalletModel::SendCoinsReturn 
     case WalletModel::PaymentRequestExpired:
         msgParams.first = tr("Payment request expired.");
         msgParams.second = CClientUIInterface::MSG_ERROR;
+        break;
+    case WalletModel::MultipleMLike:
+        msgParams.first = tr("Only one destination should be set for an MLike transaction.");
+        break;
+    case WalletModel::MLikeFailure:
+        msgParams.first = tr("Failed to create MLike transaction.");
+        break;
+    case WalletModel::MLikeAmountTooSmall:
+        msgParams.first = tr("MLike minimum send is 10,000 MOON.");
         break;
     // included to prevent a compiler warning.
     case WalletModel::OK:

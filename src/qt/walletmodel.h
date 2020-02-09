@@ -143,7 +143,10 @@ public:
         TransactionCreationFailed, // Error returned when wallet is still locked
         TransactionCommitFailed,
         AbsurdFee,
-        PaymentRequestExpired
+        PaymentRequestExpired,
+        MultipleMLike,
+        MLikeFailure,
+        MLikeAmountTooSmall
     };
 
     enum EncryptionStatus
@@ -177,7 +180,10 @@ public:
     };
 
     // prepare transaction for getting txfee before sending coins
-    SendCoinsReturn prepareTransaction(WalletModelTransaction &transaction, const CCoinControl& coinControl, const bool moonword = false);
+    SendCoinsReturn prepareTransaction(WalletModelTransaction &transaction, CCoinControl& coinControl, const bool moonword = false);
+
+    bool prepareMLikeTransaction(const std::string address, std::vector<CRecipient>& recipients, const CCoinControl& coinControl);
+    bool calculateHistoricalLikeTransactions(const std::string &address, std::map<std::string, std::map<int, CAmount>>& payee_history, CAmount &total_paid_to_mlike);
 
     // Send coins to a list of recipients
     SendCoinsReturn sendCoins(WalletModelTransaction &transaction);

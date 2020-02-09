@@ -2787,7 +2787,7 @@ OutputType CWallet::TransactionChangeType(OutputType change_type, const std::vec
 }
 
 bool CWallet::CreateTransaction(interfaces::Chain::Lock& locked_chain, const std::vector<CRecipient>& vecSend, CTransactionRef& tx, CReserveKey& reservekey, CAmount& nFeeRet,
-                         int& nChangePosInOut, std::string& strFailReason, const CCoinControl& coin_control, bool sign, const bool moonword)
+                         int& nChangePosInOut, std::string& strFailReason, const CCoinControl& coin_control, bool sign, const bool moonword, const bool mlike)
 {
     CAmount nValue = 0;
     int nChangePosRequest = nChangePosInOut;
@@ -3091,6 +3091,40 @@ bool CWallet::CreateTransaction(interfaces::Chain::Lock& locked_chain, const std
         txNew.vin.clear();
         std::vector<CInputCoin> selected_coins(setCoins.begin(), setCoins.end());
         Shuffle(selected_coins.begin(), selected_coins.end(), FastRandomContext());
+
+        // Move mlike payee to be first vin, vin[0] and vout[1] should be same payee
+        if (mlike)
+        {
+            std::vector<COutPoint> vCoinControl;
+            coin_control.ListSelected(vCoinControl);
+
+            // Should be at least one coin control selected output for MLike TXs
+            if (vCoinControl.size() < 1)
+            {
+                return false;
+            }
+
+            // Iterate over selected coins
+            for (size_t i = 0; i < selected_coins.size(); ++i)
+            {
+                // Find our first coin control outpoint
+                if (vCoinControl[0] == selected_coins[i].outpoint)
+                {
+                    // Make sure it's not already at the beginning
+                    if (selected_coins[i].outpoint != selected_coins[0].outpoint)
+                    {
+                        LogPrint(BCLog::MLIKE, "%s: Before swap vin[%d] %s with vin[0] %s\n", __func__, i, selected_coins[i].outpoint.ToString(), selected_coins[0].outpoint.ToString());
+
+                        // Swap out output with the one at the front
+                        std::swap(selected_coins[i], selected_coins[0]);
+
+                        LogPrint(BCLog::MLIKE, "%s: After swap vin[%d] %s with vin[0] %s\n", __func__, i, selected_coins[i].outpoint.ToString(), selected_coins[0].outpoint.ToString());
+                    }
+
+                    break;
+                }
+            }
+        }
 
         // Note how the sequence number is set to non-maxint so that
         // the nLockTime set above actually works.

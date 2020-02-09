@@ -53,6 +53,7 @@ public Q_SLOTS:
 
 Q_SIGNALS:
     void removeEntry(SendCoinsEntry *entry);
+    void toAddressChanged(const QString &address);
     void useAvailableBalance(SendCoinsEntry* entry);
     void payAmountChanged();
     void subtractFeeFromAmountChanged();

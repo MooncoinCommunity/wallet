@@ -17,11 +17,14 @@
 #include <qt/sendcoinsdialog.h>
 #include <qt/transactiontablemodel.h>
 
+#include <addressindex.h>
 #include <interfaces/handler.h>
 #include <interfaces/node.h>
 #include <key_io.h>
 #include <ui_interface.h>
 #include <util/system.h> // for GetBoolArg
+#include <util/moneystr.h> // for FormatMoney
+#include <validation.h>
 #include <wallet/coincontrol.h>
 #include <wallet/wallet.h>
 
@@ -126,7 +129,7 @@ bool WalletModel::validateAddress(const QString &address)
     return IsValidDestinationString(address.toStdString());
 }
 
-WalletModel::SendCoinsReturn WalletModel::prepareTransaction(WalletModelTransaction &transaction, const CCoinControl& coinControl, const bool moonword)
+WalletModel::SendCoinsReturn WalletModel::prepareTransaction(WalletModelTransaction &transaction, CCoinControl& coinControl, const bool moonword)
 {
     CAmount total = 0;
     bool fSubtractFeeFromAmount = false;
@@ -140,6 +143,7 @@ WalletModel::SendCoinsReturn WalletModel::prepareTransaction(WalletModelTransact
 
     QSet<QString> setAddress; // Used to detect duplicates
     int nAddresses = 0;
+    std::string nMLikeAddress;
 
     // Pre-check input data for validity
     for (const SendCoinsRecipient &rcp : recipients)
@@ -180,6 +184,19 @@ WalletModel::SendCoinsReturn WalletModel::prepareTransaction(WalletModelTransact
             {
                 return InvalidAmount;
             }
+            if (rcp.address.toStdString().rfind(Params().MLikesPrefix(), 0) != std::string::npos)
+            {
+                nMLikeAddress = rcp.address.toStdString();
+
+                if (rcp.amount < 10000 * COIN)
+                {
+                    return MLikeAmountTooSmall;
+                }
+            }
+            if (!nMLikeAddress.empty() && nAddresses > 0)
+            {
+                return MultipleMLike;
+            }
             setAddress.insert(rcp.address);
             ++nAddresses;
 
@@ -190,6 +207,7 @@ WalletModel::SendCoinsReturn WalletModel::prepareTransaction(WalletModelTransact
             total += rcp.amount;
         }
     }
+
     if(!moonword && setAddress.size() != nAddresses)
     {
         return DuplicateAddress;
@@ -202,13 +220,96 @@ WalletModel::SendCoinsReturn WalletModel::prepareTransaction(WalletModelTransact
         return AmountExceedsBalance;
     }
 
+    if (!nMLikeAddress.empty())
+    {
+        // Only a single recipient should be set for MLike TXs at this point
+        if (vecSend.size() != 1)
+        {
+            return MLikeFailure;
+        }
+
+        // We need a "senders address" for prepareMLikeTransaction, if no output selected we'll select one here
+        if (!coinControl.HasSelected())
+        {
+            interfaces::WalletTxOut selected_out{};
+            COutPoint selected_output{};
+            interfaces::WalletTxOut largest_out{};
+            COutPoint largest_output{};
+            CAmount target_value = vecSend[0].nAmount;
+
+            const auto& coin_list = m_wallet->listCoins();
+
+            // Iterate over all coins in wallet
+            for (const auto& coins : coin_list)
+            {
+                for (const auto& outpair : coins.second)
+                {
+                    const COutPoint& output = std::get<0>(outpair);
+                    const interfaces::WalletTxOut& out = std::get<1>(outpair);
+                    if (m_wallet->isLockedCoin(output))
+                        continue;
+
+                    // Set largest out first time, or if new output is smaller than previous one
+                    if (largest_out.txout.IsNull() || out.txout.nValue > largest_out.txout.nValue)
+                    {
+                        largest_out = out;
+                        largest_output = output;
+                    }
+
+                    // Large enough to cover the amount
+                    if (out.txout.nValue > target_value)
+                    {
+                        // Set for first time, or if new output is smaller than previous one
+                        if (selected_out.txout.IsNull() || out.txout.nValue < selected_out.txout.nValue)
+                        {
+                            selected_out = out;
+                            selected_output = output;
+                        }
+                    }
+                }
+            }
+
+            // If we still have nothing we've failed
+            if (selected_out.txout.IsNull() && largest_out.txout.IsNull())
+            {
+                return MLikeFailure;
+            }
+
+            if (selected_out.txout.IsNull())
+            {
+                coinControl.Select(largest_output);
+                LogPrint(BCLog::MLIKE, "%s: output chosen TX: %s output: %d\n", __func__, largest_output.hash.GetHex(), largest_output.n);
+            }
+            else
+            {
+                coinControl.Select(selected_output);
+                LogPrint(BCLog::MLIKE, "%s: output chosen TX: %s output: %d\n", __func__, selected_output.hash.GetHex(), selected_output.n);
+            }
+
+            // Lastly set coin control to allow other inputs as selected input may not be enough
+            coinControl.fAllowOtherInputs = true;
+        }
+
+        if (!prepareMLikeTransaction(nMLikeAddress, vecSend, coinControl))
+        {
+            return MLikeFailure;
+        }
+    }
+
     {
         CAmount nFeeRequired = 0;
         int nChangePosRet = -1;
+
+        // MLike TXs should have change at the end of other outputs
+        if (!nMLikeAddress.empty())
+        {
+            nChangePosRet = vecSend.size();
+        }
+
         std::string strFailReason;
 
         auto& newTx = transaction.getWtx();
-        newTx = m_wallet->createTransaction(vecSend, coinControl, true /* sign */, nChangePosRet, nFeeRequired, strFailReason, moonword);
+        newTx = m_wallet->createTransaction(vecSend, coinControl, true /* sign */, nChangePosRet, nFeeRequired, strFailReason, moonword, !nMLikeAddress.empty());
         transaction.setTransactionFee(nFeeRequired);
         if (fSubtractFeeFromAmount && newTx)
             transaction.reassignAmounts(nChangePosRet);
@@ -232,6 +333,346 @@ WalletModel::SendCoinsReturn WalletModel::prepareTransaction(WalletModelTransact
     }
 
     return SendCoinsReturn(OK);
+}
+
+bool WalletModel::prepareMLikeTransaction(const std::string address, std::vector<CRecipient>& recipients, const CCoinControl& coinControl)
+{
+    // Address as key, value is map of height as key and amount paid as value
+    std::map<std::string, std::map<int, CAmount>> payee_history;
+
+    // Holds total valid amount paid to like address
+    CAmount total_paid_to_mlike{0};
+
+    if (!calculateHistoricalLikeTransactions(address, payee_history, total_paid_to_mlike))
+    {
+        return false;
+    }
+
+    // Save MLike recipient and clear vector
+    CRecipient recipientMLike = recipients[0];
+    recipients.clear();
+
+    // Reduce to 10%, use this amount to calculate amount to pay others to keep in line with historical validation
+    recipientMLike.nAmount /= 10;
+    recipients.push_back({recipientMLike.scriptPubKey, recipientMLike.nAmount, recipientMLike.fSubtractFeeFromAmount});
+
+    // Get senders address from first selected coin control item
+    std::vector<COutPoint> control_outpoints;
+    coinControl.ListSelected(control_outpoints);
+
+    // Must be at least one selected outpoint
+    if (control_outpoints.size() < 1)
+    {
+        return false;
+    }
+
+    // Get coin from first coin control output
+    std::vector<interfaces::WalletTxOut> wtxs = m_wallet->getCoins(std::vector<COutPoint>{control_outpoints[0]});
+
+    // Should be at least one entry
+    if (wtxs.size() < 1)
+    {
+        LogPrint(BCLog::MLIKE, "%s: No coins returned for selected output. TX: %s\n", __func__, control_outpoints[0].ToString());
+        return false;
+    }
+
+    // Get new mlike payee address from selected coin
+    CTxDestination current_senders_dest;
+    ExtractDestination(wtxs[0].txout.scriptPubKey, current_senders_dest);
+    std::string current_senders_address{EncodeDestination(current_senders_dest)};
+
+    // Add payee from new transaction to the payee_history used to calculate outputs
+    payee_history[current_senders_address][std::numeric_limits<int>::max()] = recipientMLike.nAmount;
+
+    // Add new mlike TX payment to total
+    total_paid_to_mlike += recipientMLike.nAmount;
+
+    LogPrint(BCLog::MLIKE, "%s: Total valid amount paid to like address: %s\n", __func__, FormatMoney(total_paid_to_mlike));
+
+    // Work out how much of the TX amount each payee gets
+    for (const auto& payee : payee_history)
+    {
+        CAmount payee_valid_total{0};
+        for (const auto& payments : payee.second)
+        {
+            payee_valid_total += payments.second;
+        }
+
+        double payee_share = double(payee_valid_total) / total_paid_to_mlike;
+
+        CScript scriptPubKey = GetScriptForDestination(DecodeDestination(payee.first));
+        CAmount payee_payment = (recipientMLike.nAmount * 9) * payee_share;
+
+        LogPrint(BCLog::MLIKE, "%s: payee: %s payee total: %s all payees total: %s payee share: %f payee payment: %s\n",
+                 __func__, payee.first, FormatMoney(payee_valid_total), FormatMoney(total_paid_to_mlike), payee_share, FormatMoney(payee_payment));
+
+        // Current sender must be second output after MLike output
+        if (payee.first == current_senders_address)
+        {
+            recipients.insert(++recipients.begin(), {scriptPubKey, payee_payment, false});
+        }
+        else
+        {
+            recipients.push_back({scriptPubKey, payee_payment, false});
+        }
+    }
+
+    if (LogAcceptCategory(BCLog::MLIKE))
+    {
+        for (const auto& recp : recipients)
+        {
+            CTxDestination recp_dest;
+            ExtractDestination(recp.scriptPubKey, recp_dest);
+            std::string recp_address{};
+            LogPrint(BCLog::MLIKE, "%s: recipients: %s amount: %s\n", __func__, EncodeDestination(recp_dest), FormatMoney(recp.nAmount));
+        }
+    }
+
+    return true;
+}
+
+bool WalletModel::calculateHistoricalLikeTransactions(const std::string& address, std::map<std::string, std::map<int, CAmount>>& payee_history, CAmount& total_paid_to_mlike)
+{
+    // Holds transaction history information for like address
+    std::vector<std::pair<CAddressIndexKey, CAmount>> addressIndex;
+
+    // Holds transactions for like address
+    std::set<std::pair<int, CTransactionRef>> mlike_transactions;
+
+    CTxDestination dest = DecodeDestination(address);
+    if (!IsValidDestination(dest))
+    {
+        LogPrint(BCLog::MLIKE, "%s: invalid destination: %s\n", __func__, address);
+        return false;
+    }
+
+    const CScriptID *scriptID = boost::get<CScriptID>(&dest);
+    if (!scriptID)
+    {
+        LogPrint(BCLog::MLIKE, "%s: address not valid script address: %s\n", __func__, address);
+        return false;
+    }
+
+    uint256 hash;
+    memcpy(&hash, scriptID, 20);
+
+    if (!GetAddressIndex(hash, 2 /* script type */, addressIndex))
+    {
+        LogPrint(BCLog::MLIKE, "%s: unable to get history for address: %s\n", __func__, address);
+        return false;
+    }
+
+    int nMatureHeight;
+    {
+        LOCK(cs_main);
+
+        // Mature height is 10 confirmations, so current block less 9 equals 10 blocks total
+        nMatureHeight = chainActive.Height() - 9;
+    }
+
+    for (auto it = addressIndex.cbegin(); it != addressIndex.cend(); it++)
+    {
+        if (it->first.blockHeight > nMatureHeight)
+        {
+            continue;
+        }
+
+        CTransactionRef tx;
+        uint256 hash_block;
+        if (!GetTransaction(it->first.txhash, tx, Params().GetConsensus(), hash_block))
+        {
+            return false;
+        }
+
+        // MLikes TX must have at least two outputs
+        if (tx->vout.size() < 2)
+        {
+            continue;
+        }
+
+        mlike_transactions.insert(std::make_pair(it->first.blockHeight, tx));
+    }
+
+    // Print history for mlike address
+    if (LogAcceptCategory(BCLog::MLIKE))
+    {
+        for (const auto& pair : mlike_transactions)
+        {
+            LogPrint(BCLog::MLIKE, "%s: mlike_transactions height: %d hash: %s\n", __func__, pair.first, pair.second->GetHash().GetHex());
+        }
+    }
+
+    for (auto it = mlike_transactions.cbegin(); it != mlike_transactions.cend(); ++it)
+    {
+        // Get TX for vin[0]
+        CTransactionRef tx;
+        uint256 hash_block;
+        if (!GetTransaction(it->second->vin[0].prevout.hash, tx, Params().GetConsensus(), hash_block))
+        {
+            LogPrint(BCLog::MLIKE, "%s: could not find TX hash: %s\n", __func__, it->second->vin[0].prevout.hash.GetHex());
+            return false;
+        }
+
+        // Get from address from vin[0]
+        CTxDestination from_dest_address;
+        ExtractDestination(tx->vout[it->second->vin[0].prevout.n].scriptPubKey, from_dest_address);
+        std::string from_address{EncodeDestination(from_dest_address)};
+
+        // First output should be to the MLikes address
+        CTxDestination to_like_address;
+        ExtractDestination(it->second->vout[0].scriptPubKey, to_like_address);
+        if (EncodeDestination(to_like_address) != address)
+        {
+            LogPrint(BCLog::MLIKE, "%s: skipping, first output not to like address. TX: %s\n", __func__, it->second->GetHash().GetHex());
+            continue;
+        }
+
+        // Second output should match address in from address in vin[0]
+        CTxDestination to_pay_to_self_address;
+        ExtractDestination(it->second->vout[1].scriptPubKey, to_pay_to_self_address);
+        if (EncodeDestination(to_pay_to_self_address) != from_address)
+        {
+            LogPrint(BCLog::MLIKE, "%s: skipping, second output does not match first input address. TX: %s\n", __func__, it->second->GetHash().GetHex());
+            continue;
+        }
+
+        // Get total outgoing from TX
+        CAmount nTXTotal{0};
+        for (const auto& txout : it->second->vout)
+        {
+            nTXTotal += txout.nValue;
+        }
+
+        // Get amount paid to MLikes address
+        CAmount mlikes_paid{it->second->vout[0].nValue};
+
+        // Make sure MLikes has some value and total amount is large enough to be valid
+        if (mlikes_paid == 0 || nTXTotal < mlikes_paid * 10)
+        {
+            LogPrint(BCLog::MLIKE, "%s: TX output value too low. amount: %s TX total: %s\n", __func__, FormatMoney(mlikes_paid), FormatMoney(nTXTotal));
+            continue;
+        }
+
+        // Map of payees and mature total to validate outputs against
+        std::map<std::string, CAmount> payee_totals;
+
+        // Total mature paid set to mlikes_paid as start
+        CAmount total_mature_paid{mlikes_paid};
+
+        // Add payee from the transaction currently being validated, remove later if TX invalid
+        if (payee_history[from_address].count(it->first) == 0)
+        {
+            payee_history[from_address][it->first] = mlikes_paid;
+        }
+        else
+        {
+            payee_history[from_address][it->first] += mlikes_paid;
+        }
+
+        // Work out total mature amount paid by each payee up to this TX
+        for (const auto& payees : payee_history)
+        {
+            CAmount nPayeeTotal{0};
+
+            // Payment needs to be mature at the time of this TX to be considered
+            for (const auto& height_and_amount : payees.second)
+            {
+                // Mature is current block less 9 more making 10 confirms
+                if (height_and_amount.first <= it->first - 9)
+                {
+                    nPayeeTotal += height_and_amount.second;
+                }
+                else
+                {
+                    // Once past mature height break loop
+                    break;
+                }
+            }
+
+            // payee may not have had any mature TXs at the time of the current TX being validated
+            if (nPayeeTotal > 0)
+            {
+                payee_totals[payees.first] = nPayeeTotal;
+                total_mature_paid += nPayeeTotal;
+            }
+        }
+
+        // Validate that previous payees have been paid by this TX
+        bool invalid{false};
+        for (const auto& payees : payee_totals)
+        {
+            for (size_t i = 0; i < it->second->vout.size(); ++i)
+            {
+                CTxDestination tx_address;
+                ExtractDestination(it->second->vout[i].scriptPubKey, tx_address);
+
+                // Find the output to the previous payee
+                if (payees.first == EncodeDestination(tx_address))
+                {
+                    // Work out how much of the total amount they contributed to
+                    double payee_share = double(payees.second) / total_mature_paid;
+
+                    // Make sure value is fair share of the remaining 90% of the amount sent
+                    CAmount payee_amount = (mlikes_paid * 9) * payee_share;
+
+                    LogPrint(BCLog::MLIKE, "%s: payee: %s payee total: %s all payees total: %s payee share: %f payee payment: %s\n",
+                             __func__, payees.first, FormatMoney(payees.second), FormatMoney(total_mature_paid), payee_share, FormatMoney(payee_amount));
+
+                    if (it->second->vout[i].nValue < payee_amount)
+                    {
+                        // Does not pay enough, set invalid and break loop
+                        invalid = true;
+                        LogPrint(BCLog::MLIKE, "%s: skipping, does not pay previous payees properly. vout: %d TX: %s\n", __func__, i, it->second->GetHash().GetHex());
+                        break;
+                    }
+                }
+            }
+
+            // TX invalid break loop
+            if (invalid)
+            {
+                break;
+            }
+        }
+
+        // TX invalid continue to next TX
+        if (invalid)
+        {
+            // If removing this TX mlike value from the users total leaves them without contribution
+            // remove their entry. Then check if at removing at this height their contribution is zero
+            // and remove their entry at height, if multiple payments at this height just reduce their amount.
+            if (payee_totals[from_address] - mlikes_paid == 0)
+            {
+                payee_history.erase(from_address);
+            }
+            else if (payee_history[from_address][it->first] - mlikes_paid == 0)
+            {
+                payee_history[from_address].erase(it->first);
+            }
+            else
+            {
+                payee_history[from_address][it->first] -= mlikes_paid;
+            }
+
+            continue;
+        }
+
+        total_paid_to_mlike += mlikes_paid;
+    }
+
+    if (LogAcceptCategory(BCLog::MLIKE))
+    {
+        for (const auto& map : payee_history)
+        {
+            LogPrint(BCLog::MLIKE, "%s: payee_history: %s\n", __func__, map.first);
+            for (const auto& pair : map.second)
+            {
+                LogPrint(BCLog::MLIKE, "%s: height: %d amount: %s\n", __func__, pair.first, FormatMoney(pair.second));
+            }
+        }
+    }
+
+    return true;
 }
 
 WalletModel::SendCoinsReturn WalletModel::sendCoins(WalletModelTransaction &transaction)
