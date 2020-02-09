@@ -70,7 +70,7 @@ public:
         consensus.nPoWForkOne = 26850;
         consensus.nPoWForkTwo = 1100000;
         consensus.nPoWForkThree = 1250000;
-        consensus.nRestoreValidation = std::numeric_limits<int>::max();
+        consensus.nRestoreValidation = 1798000;
         consensus.fPowAllowMinDifficultyBlocks = false;
         consensus.fPowNoRetargeting = false;
         consensus.nRuleChangeActivationThreshold = 6048; // 75% of 8064
