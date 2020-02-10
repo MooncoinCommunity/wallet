@@ -1,7 +1,7 @@
 ## Mooncoin Core 0.18.1.L
 
 
-* Hardfork to new codebase occurs at block 1,798,000, however Mooncoin 0.10 and 0.13 wallets will be compatible until this point.
+* Hardfork to new codebase occurs at block 1,798,000, however Mooncoin 0.13 and 0.18 wallets will be compatible until this point.
 
 * This new version comes with Likes and MoonWord.
 
