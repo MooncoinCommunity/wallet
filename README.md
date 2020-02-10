@@ -1,11 +1,11 @@
-## Mooncoin Core 0.18.1-L
+## Mooncoin Core 0.18.1.L
 
 
 * Hardfork to new codebase occurs at block 1,798,000, however Mooncoin 0.10 and 0.13 wallets will be compatible until this point.
 
-* This new version comes with MLike and MoonWord.
+* This new version comes with Likes and MoonWord.
 
-* PoW algorithm is Scrypt, not BalloonHash. Pools and lightning network (in the future) support Scrypt, Balloon is exotic.
+* PoW algorithm is Scrypt.
 
 * Block retarget algorithm will switch to DUAL_KGW3 with Bitsend timeout; after which diff will lower dynamically if a block has not been found after 60 minutes.
 
