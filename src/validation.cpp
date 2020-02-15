@@ -1425,10 +1425,16 @@ CAmount GetBlockSubsidy(const int nHeight, const uint256 prevHash)
         nSubsidy = floor( 19697202017 / (floor(nHeight/100000)*100000) ) * COIN;
     }
 
-    // case for block 5432100000 onwards
-    if (nHeight > 5432099999)
+    // cases for block 1250000+
+    if (nHeight > 1249999)
     {
-        nSubsidy = 0 * COIN;
+        nSubsidy = floor( floor(0.29531 * 19697202017) / (floor(nHeight/100000)*100000) ) * COIN;
+    }
+
+    // case for block 5432100000 onwards
+    if (nHeight > 2147483647)
+    {             // 2147483647 (was 5432099999)
+        nSubsidy = 0;
     }
 
     return nSubsidy;
